@@ -11,4 +11,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
+
+    public function json_return($status,$info=''){
+        $data['errorno']=$status;
+        $data['msg']=config('app.error_no.'.$status.'');
+        if(is_array($info) || $info!='') $data['info']=$info;
+        return json_encode($data);
+    }
 }

@@ -41,6 +41,15 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    /**
+    * 自定义常量
+    */
+
+    'title' => env('TITLE','华东餐饮集团后台管理系统'),
+    'title_en' => env('TITLE_EN',''),
+    'copyright' => env('COPY_RIGHT',''),
+    'versionCMS' => env('VERSION_CMS',''),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -52,7 +61,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -204,4 +213,9 @@ return [
 
     ],
 
+    'error_no'=>[
+        '10000' =>'成功',
+        //login status
+        '40001' =>'登录失败 账号或密码错误',
+    ]
 ];
