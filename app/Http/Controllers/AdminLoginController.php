@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Request,Session,Validator,Crypt;
-use App\Http\Model\AdminLoginModel;
+use App\Http\Model\AdminModel as Admin;
 
 class AdminLoginController extends Controller
 {
 
 	public function login(){
-
 		//有session直接跳转到后台主页面
 		if(Session::has('admin')){
 			header('Location:../admin');
@@ -21,36 +20,34 @@ class AdminLoginController extends Controller
     public function loginCheck(){
         $validator = Validator::make(Request::all(), [
             'user_name' => 'required|max:255',
-            'user_password' => 'required|min:6|confirmed',
+            'user_password' => 'required|min:1',
         ]);
 
         if ($validator->fails()) {
-            return self::json_return(40001);
+            self::json_return(40001);
         }
 
         $name = Request::input('user_name');
         $pwd = Request::input('user_password');
         $ip=Request::getClientIp();
 
+        $user_info = Admin::where('name',$name)->first();
 
-        $user_info = Admin::getAdmin($name);
         if(isset($user_info)){
-        	$md5_pwd = md5($user_info->salt.$pwd);
-        	if($user_info->pwd == $md5_pwd){
-        		Session::put('admin', $name);
-                Session::save();
+        	$de_pwd = Crypt::decrypt($user_info->pwd);
+        	if($pwd == $de_pwd){
 				$res = Admin::updateAdmin($name,$ip);
-				if($res)
-					echo self::json_return(0,'登录成功');
+                //登录成功
+				if($res){
+                    Session::put('admin', $name);
+                    Session::save();
+                    self::json_return(40000);
+                }
 				else
-					echo self::json_return(10002,'数据连接异常，请重试');
+					self::json_return(40002);
         	}
-        	else 
-        		echo self::json_return(10001,'账号或密码错误');
-        	exit;
         }
-        	echo self::json_return(10001,'账号或密码错误');
-        exit;
+        self::json_return(40001);
     }
 
 	public function loginOut(){

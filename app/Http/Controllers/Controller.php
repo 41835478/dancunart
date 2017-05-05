@@ -12,10 +12,21 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, AuthorizesResources, DispatchesJobs, ValidatesRequests;
 
+    /**
+     * 返回json
+     * @param $status
+     * @param $info
+     */
     public function json_return($status,$info=''){
         $data['errorno']=$status;
         $data['msg']=config('app.error_no.'.$status.'');
-        if(is_array($info) || $info!='') $data['info']=$info;
-        return json_encode($data);
+        if(is_array($info)){
+            foreach ($info as $keys => $vo) {
+                $data[$keys] = $vo;
+            }
+        }
+        echo json_encode($data);
+        unset($arr);
+        exit;
     }
 }

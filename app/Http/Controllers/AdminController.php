@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Request,Session,URL;
+use Request,Session,URL,Route;
+use App\Http\Model\AdminModel as Admin;
 
 class AdminController extends Controller
 {
@@ -17,9 +18,8 @@ class AdminController extends Controller
 
     public function index(){
         $title="首页";
-        $nav="0";
-        $admin_info = Admin::getAdmin(Session::get('admin'));
-		return view('Admin.index',compact('title','nav','admin_info'));
+        $data = Admin::where('name',Session::get('admin'))->first();
+		return view('Admin.index',compact('title','data'));
     }
 
     public function show(){

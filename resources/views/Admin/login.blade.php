@@ -31,8 +31,8 @@ $(document).ready(function() {
       else{
         $.post("login",{user_name:user_name,user_password:user_psw,_token:'{{csrf_token()}}'},function(result){
           result=jQuery.parseJSON(result);
-          if(result.errorno==0) window.location.href="/admin";
-          else {alert('账号或密码错误');createCode();}
+          if(result.errorno==40000) window.location.href="/admin";
+          else {alert(result.msg);createCode();}
         });
       }
   })

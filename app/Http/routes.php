@@ -12,9 +12,6 @@
 */
 
 Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
-//    Route::get('/',function(){
-//       dd(config('app.error_no.40001'));
-//    });
     /**
 	 * 后台路由
 	 */
@@ -22,6 +19,9 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::get('login','AdminLoginController@login')->name('adminLogin');
     Route::post('login','AdminLoginController@loginCheck');
     Route::get('loginOut','AdminLoginController@loginOut');
+
+    //后台修改用户信息路由
+    Route::resource('auth','AdminAuthController');
 
     //后台主页路由
     Route::resource('/','AdminController');
