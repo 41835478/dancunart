@@ -23,6 +23,9 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
 
+    //后台艺术家路由
+    Route::resource('artist','AdminArtistController');
+
     //后台主页路由
     Route::resource('/','AdminController');
 });

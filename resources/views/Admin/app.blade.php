@@ -38,10 +38,8 @@
         </li>
         <li>
             <dl>
-                <dt>店铺管理</dt>
-                <dd><a href="{{URL::to('admin/sellshop')}}"  >餐馆管理</a></dd>
-                <dd><a href="{{URL::to('admin/buyshop')}}" >娱乐场所管理</a></dd>
-                <dd><a href="{{URL::to('admin/relation')}}" >对应关系</a></dd>
+                <dt>艺术家管理</dt>
+                <dd><a href="{{URL::to('admin/artist')}}" @if(Request::path() == 'admin/artist') class="active" @endif >艺术家列表</a></dd>
             </dl>
         </li>
 
