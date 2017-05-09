@@ -156,6 +156,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -210,11 +211,16 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 
     'error_no'=>[
-        //common status
+        //add status
+        '20000' => '新增成功',
+        '20001' => '新增失败',
+
+        //update status
         '30000' => '修改成功',
         '30001' => '修改失败,请重试',
 

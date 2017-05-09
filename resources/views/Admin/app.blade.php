@@ -39,7 +39,8 @@
         <li>
             <dl>
                 <dt>艺术家管理</dt>
-                <dd><a href="{{URL::to('admin/artist')}}" @if(Request::path() == 'admin/artist') class="active" @endif >艺术家列表</a></dd>
+                <dd><a href="{{URL::to('admin/artist')}}" @if( strpos(Request::path(),'artist')!=false) class="active" @endif >艺术家列表</a></dd>
+                <dd><a href="{{URL::to('admin/artistclass')}}" @if( strpos(Request::path(),'artistclass')!=false) class="active" @endif >艺术家分类</a></dd>
             </dl>
         </li>
 

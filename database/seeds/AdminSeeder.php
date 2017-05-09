@@ -20,5 +20,12 @@ class AdminSeeder extends Seeder
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ]);
+
+        DB::table('admin_role')->insert([
+            'role_name'=>'超级管理员',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+
     }
 }

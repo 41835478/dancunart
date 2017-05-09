@@ -54,6 +54,11 @@ return [
             'visibility' => 'public',
         ],
 
+        'uploads'=>[
+            'driver' => 'local',
+            'root' => public_path('uploads').'/'.date('Y').'/'.date('m').'_'.date('d').'/',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',

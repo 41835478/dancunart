@@ -24,7 +24,10 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::resource('auth','AdminAuthController');
 
     //后台艺术家路由
+    Route::post('artist/upload','AdminArtistController@upload');
     Route::resource('artist','AdminArtistController');
+    //后台艺术家分类路由
+    Route::resource('artistclass','AdminArtistClassController');
 
     //后台主页路由
     Route::resource('/','AdminController');

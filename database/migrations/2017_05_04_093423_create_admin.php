@@ -23,6 +23,12 @@ class CreateAdmin extends Migration
             $table->integer('role_id')->comment('角色id');
             $table->timestamps();
         });
+
+        Schema::create('admin_role', function (Blueprint $table) {
+            $table->increments('id')->comment('角色id');
+            $table->string('role_name',80)->comment('角色名称');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -33,5 +39,6 @@ class CreateAdmin extends Migration
     public function down()
     {
         Schema::drop('admin');
+        Schema::drop('admin_role');
     }
 }

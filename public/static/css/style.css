@@ -150,7 +150,7 @@ header .rt_nav li .quit_icon:before{content:"Q";}
 .uploadImg span{display:block;font-size:12px;text-align:center;color:#139667;}
 .uploadImg span:hover{color:#209f71;}
 .uploadImg span:before{content:"#";font-family:'adminthemesregular';display:block;font-size:40px;}
-.ulColumn2{overflow:hidden;}
+.ulColumn2{overflow:hidden; padding-bottom:20px;}
 .ulColumn2 li{margin:15px 0;}
 .ulColumn2 li .item_name{text-align:right;display:inline-block; width:120px;}
 /*TAB*/
