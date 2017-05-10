@@ -29,7 +29,10 @@
         <li>
             <dl>
                 <dt onClick="window.location.href='{{URL::to('admin/conf')}}'">系统设置</dt>
-                <dd><a href="{{URL::to('admin/conf')}}" @if(Request::path() == 'admin') class="active" @endif >活动配置</a></dd>
+                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-1') class="active" @endif >活动配置</a></dd>
+                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-2') class="active" @endif >合作单位</a></dd>
+                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-3') class="active" @endif >排行榜</a></dd>
+                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-4') class="active" @endif >客服配置</a></dd>
                 {{--<dd><a href="{{URL::to('Roll/config')}}" @if ($nav == '1-2') class="active" @endif >普通奖品池</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/dajiang')}}"  @if ($nav == '1-3') class="active" @endif >行列大奖</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/log')}}" @if ($nav == '1-4') class="active" @endif >日志列表</a></dd>--}}
@@ -39,10 +42,30 @@
         <li>
             <dl>
                 <dt>艺术家管理</dt>
-                <dd><a href="{{URL::to('admin/artist')}}" @if( strpos(Request::path(),'artist')!=false) class="active" @endif >艺术家列表</a></dd>
-                <dd><a href="{{URL::to('admin/artistclass')}}" @if( strpos(Request::path(),'artistclass')!=false) class="active" @endif >艺术家分类</a></dd>
+                <dd><a href="{{URL::to('admin/artist')}}" @if ($nav == '2-1') class="active" @endif >艺术家列表</a></dd>
+                <dd><a href="{{URL::to('admin/artistclass')}}" @if ($nav == '2-2') class="active" @endif >艺术家分类</a></dd>
             </dl>
         </li>
+
+        <li>
+            <dl>
+                <dt>拍品管理</dt>
+                <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '3-1') class="active" @endif >拍品列表</a></dd>
+            </dl>
+        </li>
+
+        <li>
+            <dl>
+                <dt>用户管理</dt>
+            </dl>
+        </li>
+
+        <li>
+            <dl>
+                <dt>交易记录</dt>
+            </dl>
+        </li>
+
 
     </ul>
 

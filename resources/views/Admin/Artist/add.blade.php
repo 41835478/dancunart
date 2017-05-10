@@ -27,14 +27,12 @@
                             <input id="upload_btn" type="file" name="file" >
                             <!--上传后显示的img-->
                             <img  id="img_url" name="id" src="" />
-
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;">描述：</span>
                             <textarea placeholder="艺术家简略描述" class="textarea" style="width:400px;height:80px;" name="desc"></textarea>
                         </li>
-
 
                         <li>
                             <span class="item_name" style="width:120px;">艺术分类：</span>
@@ -79,7 +77,7 @@
         //上传图片相关
         function applyAjaxFileUpload(element) {
             $(element).AjaxFileUpload({
-                action: "{{asset('/admin/artist/upload')}}",
+                action: "{{asset('/admin/upload')}}",
                 onChange: function(filename) {
                     var $span = $("<span />").attr("class", $(this).attr("id")).text("Uploading").insertAfter($(this));
                     $(this).remove();

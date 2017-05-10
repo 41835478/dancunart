@@ -12,7 +12,7 @@ class CreateArtist extends Migration
      */
     public function up()
     {
-        Schema::create('artist', function (Blueprint $table) {
+        Schema::create('art_artist', function (Blueprint $table) {
             $table->increments('id')->comment('自增id');
             $table->string('name',80)->comment('艺术家名称');
             $table->string('nick',80)->comment('艺术家昵称')->defalut('');
@@ -26,9 +26,9 @@ class CreateArtist extends Migration
             $table->timestamps();
         });
 
-        Schema::create('artist_class', function (Blueprint $table) {
+        Schema::create('art_artist_class', function (Blueprint $table) {
             $table->increments('id')->comment('自增id');
-            $table->string('class_name',80)->comment('艺术分类名称');
+            $table->string('class_name',80)->comment('艺术家分类名称');
         });
     }
 
@@ -39,7 +39,7 @@ class CreateArtist extends Migration
      */
     public function down()
     {
-        Schema::drop('artist');
-        Schema::drop('artist_class');
+        Schema::drop('art_artist');
+        Schema::drop('art_artist_class');
     }
 }

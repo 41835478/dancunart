@@ -4,7 +4,7 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArtistModel extends Model
+class ArtworkModel extends Model
 {
-    protected $table = 'art_artist';
+    protected $table = 'art_artwork';
 }

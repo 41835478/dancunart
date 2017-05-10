@@ -20,14 +20,18 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::post('login','AdminLoginController@loginCheck');
     Route::get('loginOut','AdminLoginController@loginOut');
 
+    //上传图片路由
+    Route::post('upload','AdminUploadController@upload');
+
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
 
     //后台艺术家路由
-    Route::post('artist/upload','AdminArtistController@upload');
     Route::resource('artist','AdminArtistController');
     //后台艺术家分类路由
     Route::resource('artistclass','AdminArtistClassController');
+    //后台拍品路由
+    Route::resource('artwork','AdminArtWorkController');
 
     //后台主页路由
     Route::resource('/','AdminController');

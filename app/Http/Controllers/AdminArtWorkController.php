@@ -4,51 +4,70 @@ namespace App\Http\Controllers;
 
 use Request,Session,Storage,Image;
 use App\Http\Model\ArtistModel as Artist;
-use App\Http\Model\ArtistClassModel as ArtistClass;
+use App\Http\Model\ArtworkModel as Artwork;
+use App\Http\Model\ArtworkClassModel as ArtworkClass;
 
-class AdminArtistController extends Controller
+class AdminArtWorkController extends Controller
 {
     public function index(){
-        $title = "艺术家管理";
-        $nav   = '2-1';
+        $title = "拍品列表";
+        $nav   = '3-1';
         $key=Request::input('key','');
 
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
+        $data = Artwork::paginate(25);
 
-        $data = Artist::paginate(25);
-        $artist_class = ArtistClass::get();
-
+        $artist = Artist::get();
         foreach($data as $key=>$vo){
-            $self_class = explode(',',$data[$key]['art_class']);
-            foreach($artist_class as $key2=>$vo2){
+            $self_class = explode(',',$data[$key]['artist']);
+            foreach($artist as $key2=>$vo2){
                 if(in_array($vo2->id,$self_class))
-                    $data[$key]['art_class_name'] .= $vo2->class_name.' ';
+                    $data[$key]['artist_list'] .= $vo2->name.' ';
             }
         }
 
-        return view('Admin.Artist.index',compact('title','key','nav','searchitem','data'));
+        $artwork_class = ArtworkClass::get();
+        foreach($data as $key=>$vo){
+            $self_class = explode(',',$data[$key]['art_class']);
+            foreach($artwork_class as $key2=>$vo2){
+                if(in_array($vo2->id,$self_class))
+                    $data[$key]['artwork_class_list'] .= $vo2->class_name.' ';
+            }
+        }
+
+        return view('Admin.Artwork.index',compact('title','key','nav','searchitem','data'));
     }
 
     public function create(){
-        $title="新增艺术家";
-        $nav   = '2-1';
-        $artist_class = ArtistClass::get();
-        $artist_class_list='';
-        foreach($artist_class as $vo){
-            $artist_class_list .="<input type='checkbox' name='artist_class[{$vo->id}]' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+        $title = "新增拍品";
+        $nav   = '3-1';
+
+        $artwork_class = ArtworkClass::get();
+        $artwork_class_list='';
+        foreach($artwork_class as $vo){
+            $artwork_class_list .="<input type='checkbox' name='artwork_class[{$vo->id}]' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
         }
-        return view('Admin.Artist.add',compact('title','nav','artist_class_list'));
+
+        $artist = Artist::get();
+        $artist_list='';
+        foreach($artist as $vo){
+            $artist_list .="<input type='checkbox' name='artist[{$vo->id}]' value='{$vo->id}'>{$vo->name}({$vo->nick})</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+
+        return view('Admin.Artwork.add',compact('title','nav','artist_list','artwork_class_list'));
     }
 
     public function store(){
         $data = Request::all();
 
-        $data['art_class']=implode(',',$data['artist_class']);
-        unset($data['_token']);
-        unset($data['artist_class']);
+        $data['art_class']=implode(',',$data['artwork_class']);
+        $data['artist']=implode(',',$data['artist']);
 
-        $res = Artist::insert($data);
+        unset($data['_token']);
+        unset($data['artwork_class']);
+
+        $res = Artwork::insert($data);
         if($res)
             self::json_return(20000);
         else
@@ -56,8 +75,8 @@ class AdminArtistController extends Controller
     }
 
     public function edit($id){
-        $title = "修改艺术家";
-        $nav   = '2-1';
+        $title = "修改拍品";
+        $nav   = '3-1';
         $data = Artist::find($id);
         $data['art_class']=explode(',',$data['art_class']);
 

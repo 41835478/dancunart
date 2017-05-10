@@ -18,8 +18,9 @@ class AdminController extends Controller
 
     public function index(){
         $title="首页";
+        $nav = 0 ;
         $data = Admin::where('name',Session::get('admin'))->first();
-		return view('Admin.index',compact('title','data'));
+		return view('Admin.index',compact('title','nav','data'));
     }
 
     public function show(){

@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ArtistClassModel extends Model
 {
-    protected  $table ='artist_class';
+    protected  $table ='art_artist_class';
+    public $timestamps = false;
 }

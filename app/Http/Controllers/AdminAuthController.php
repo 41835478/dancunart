@@ -10,8 +10,9 @@ class AdminAuthController extends Controller
     //管理员修改个人信息
     public function index(){
         $title = "修改我的信息";
+        $nav   = '0';
         $data = Admin::where('name',Session::get('admin'))->first();
-        return view('Admin.Auth.index',compact('title','data'));
+        return view('Admin.Auth.index',compact('title','nav','data'));
     }
 
     public function store(){
