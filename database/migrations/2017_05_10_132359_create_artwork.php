@@ -29,7 +29,7 @@ class CreateArtwork extends Migration
             $table->mediumInteger('buy_num')->comment('出价次数');
             $table->dateTime('start_time')->comment('开始时间');
             $table->dateTime('end_time')->comment('结束时间');
-            $table->string('art_class')->comment('艺术品分类');
+            $table->string('artwork_class')->comment('艺术品分类');
             $table->boolean('status')->comment('1上架展示，0下架')->default(1);
             $table->timestamps();
         });

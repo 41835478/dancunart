@@ -64,12 +64,12 @@
                             <input type="text" class="textbox" id="end_time" name="end_time"  placeholder="请输入结束销售时间..." />
                         </li>
 
-                        <li>
+                        <li id="artwork_class_id">
                             <span class="item_name" style="width:120px;">拍品分类：</span>
                                 {!!$artwork_class_list!!}
                         </li>
 
-                        <li>
+                        <li id="artist_list_id">
                             <span class="item_name" style="width:120px;">艺术家选择：</span>
                                 {!!$artist_list!!}
                         </li>
@@ -170,6 +170,15 @@
             var start_time = $("input[name = 'start_time']").val();
             var end_time = $("input[name = 'end_time']").val();
 
+            var artwork_class_flag=true;
+            $("#artwork_class_id > input").each(function() {
+                if($(this).is(':checked')) artwork_class_flag=false;
+            });
+
+            var artist_list_flag=true;
+            $("#artist_list_id > input").each(function() {
+                if($(this).is(':checked')) artist_list_flag=false;
+            });
 
             if (name == '' || img == '' || img_thumb == '' || desc == '' || typeof(content) == 'undefined') {
                 showAlert('请填完全', '', '');
@@ -178,6 +187,11 @@
             if (isNaN(parseInt(start_price)) || isNaN(parseInt(each_increase)) ||
                     isNaN(parseInt(delay_seconds)) || isNaN(parseInt(reserve_price)) || isNaN(parseInt(margin))) {
                 showAlert('部分字段需要填写数字', '', '');
+                return false;
+            }
+
+            if(artwork_class_flag || artist_list_flag){
+                showAlert('拍品分类和相关艺术家没有选择', '', '');
                 return false;
             }
 

@@ -33,6 +33,9 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //后台拍品路由
     Route::resource('artwork','AdminArtWorkController');
 
+    //用户路由
+    Route::resource('user','AdminUserController');
+
     //后台主页路由
     Route::resource('/','AdminController');
 });

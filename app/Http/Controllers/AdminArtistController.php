@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request,Session,Storage,Image;
+use Request;
 use App\Http\Model\ArtistModel as Artist;
 use App\Http\Model\ArtistClassModel as ArtistClass;
 

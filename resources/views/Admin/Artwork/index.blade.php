@@ -72,10 +72,10 @@
             window.location.href="{{URL::to('admin/artwork')}}?key="+key;
         })
         function isdelete(id){
-            var res=confirm("确定删除该拍品，并且退还？");
+            var res=confirm("确定删除该拍品，并且同步到艺术家信息？");
             if(res==true){
                 $.ajax({
-                    url  : "{{URL::to('admin/artist')}}/"+id,
+                    url  : "{{URL::to('admin/artwork')}}/"+id,
                     type : "delete",
                     data : "&_token={{csrf_token()}}",
                     dataType: "json",
@@ -85,16 +85,14 @@
                     success:function(result){
                         if(result.errorno==50000){
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg,'{{URL::to('admin/artist')}}','{{URL::to('admin/artist')}}');
+                            showAlert(result.msg,'{{URL::to('admin/artwork')}}','{{URL::to('admin/artwork')}}');
                         }
                         else {
                             $(".loading_area").fadeOut(1500);
                             showAlert(result.msg,'','');
                         }
                     }
-
                 })
-
             }
         }
     </script>

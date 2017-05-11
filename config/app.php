@@ -45,7 +45,7 @@ return [
     * 自定义常量
     */
 
-    'title' => env('TITLE','华东餐饮集团后台管理系统'),
+    'title' => env('TITLE','dancunart'),
     'title_en' => env('TITLE_EN',''),
     'copyright' => env('COPY_RIGHT',''),
     'versionCMS' => env('VERSION_CMS',''),

@@ -8,35 +8,70 @@
                 <form id="data">
                     <ul class="ulColumn2">
                         <li>
-                            <span class="item_name" style="width:120px;">艺术家名称：</span>
+                            <span class="item_name" style="width:120px;">拍品名称：</span>
                             <input type="text" class="textbox textbox_295" name="name" value="{{$data->name}}"/>
                         </li>
 
-                        <li>
-                            <span class="item_name" style="width:120px;">艺术家昵称：</span>
-                            <input type="text" class="textbox textbox_295" name="nick" value="{{$data->nick}}"/>
-                        </li>
-
                         <li id="upload_li">
-                            <span class="item_name" style="width:120px;">头像：</span>
+                            <span class="item_name" style="width:120px;">拍品图片：</span>
                             <input type="button" class="link_btn" id="click_btn" value="选择图片"/>
 
-                            <input id="avatar_url" name="avatar" type="hidden"  value="{{$data->avatar}}">
-                            <input id="avatar_thumb_url" name="avatar_thumb" type="hidden"  value="{{$data->avatar_thumb}}">
+                            <input id="avatar_url" name="img" type="hidden"  value="{{$data->img}}">
+                            <input id="avatar_thumb_url" name="img_thumb" type="hidden"  value="{{$data->img_thumb}}">
                             <!--隐藏file按钮-->
                             <input id="upload_btn" type="file" name="file" >
                             <!--上传后显示的img-->
-                            <img  id="img_url" name="id" src="{{asset('/')}}{{$data->avatar_thumb}}" style="display:inline"/>
+                            <img  id="img_url" name="id" src="{{asset('/')}}{{$data->img_thumb}}" style="display:inline"/>
                         </li>
 
                         <li>
-                            <span class="item_name" style="width:120px;">描述：</span>
-                            <textarea placeholder="艺术家简略描述" class="textarea" style="width:400px;height:80px;" name="desc">{{$data->desc}}</textarea>
+                            <span class="item_name" style="width:120px;">视频地址：</span>
+                            <input type="text" class="textbox textbox_295" name="video" value="{{$data->video}}"/>
                         </li>
 
                         <li>
-                            <span class="item_name" style="width:120px;">艺术分类：</span>
-                            {!!$artist_class_list!!}
+                            <span class="item_name" style="width:120px;">拍品描述：</span>
+                            <textarea placeholder="拍品简略描述" class="textarea" style="width:400px;height:80px;" name="desc">{{$data->desc}}</textarea>
+                        </li>
+
+                        <li>
+                            <span class="item_name" style="width:120px;">起拍价：</span>
+                            <input type="number" class="textbox" name="start_price" value="{{$data->start_price}}"/> 单位：元
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">加价幅度：</span>
+                            <input type="number" class="textbox" name="each_increase" value="{{$data->each_increase}}"/> 单位：元
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">延迟周期：</span>
+                            <input type="number" class="textbox" name="delay_seconds" value="{{$data->delay_seconds}}"/> 单位：分
+                        </li><li>
+                            <span class="item_name" style="width:120px;">保留价：</span>
+                            <input type="number" class="textbox" name="reserve_price" value="{{$data->reserve_price}}"/> 单位：元
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">保证金：</span>
+                            <input type="number" class="textbox" name="margin" value="{{$data->margin}}"/> 单位：元
+                        </li>
+
+                        <li class="time_handle">
+                            <span class="item_name">开始时间：</span>
+                            <input type="text" class="textbox" id="start_time" name="start_time" value="{{$data->start_time}}" placeholder="请输入开始销售时间..." />
+                        </li>
+
+                        <li class="time_handle">
+                            <span class="item_name">结束时间：</span>
+                            <input type="text" class="textbox" id="end_time" name="end_time" value="{{$data->end_time}}" placeholder="请输入结束销售时间..." />
+                        </li>
+
+                        <li id="artwork_class_id">
+                            <span class="item_name" style="width:120px;">拍品分类：</span>
+                            {!!$artwork_class_html!!}
+                        </li>
+
+                        <li id="artist_list_id">
+                            <span class="item_name" style="width:120px;">艺术家选择：</span>
+                            {!!$artist_list_html!!}
                         </li>
 
                         <li>
@@ -46,11 +81,11 @@
                         </li>
 
                         <li>
-                            <span class="item_name" style="width:120px;">艺术家博客：</span>
+                            <span class="item_name" style="width:120px;">拍品详细信息：</span>
                         </li>
 
                         <div style="margin:0px 5%;">
-                            <script id="container" name="blog" type="text/plain" style="width:100%;height:500px;">{!! $data->blog !!}</script>
+                            <script id="container" name="content" type="text/plain" style="width:100%;height:500px;">{!! $data->content !!}</script>
                         </div>
 
                         <li>
@@ -63,7 +98,6 @@
 
         </div>
     </section>
-
 @endsection
 @section('footer')
     <link href="{{asset('umeditor/themes/default/_css/umeditor.css')}}" type="text/css" rel="stylesheet">
@@ -112,27 +146,76 @@
         //编辑器相关
         var um = UM.getEditor('container');
 
-        $("#link_btn").click(function(){
-            var name = $("input[name = 'name']").val();
+        $(function(){
+            $('#start_time ,#end_time').datetimepicker({
+                changeYear: true,
+                regional:"zh-CN",
+                dateFormat:"yy-mm-dd",
+                timeFormat: "hh:mm:ss"
+            });
+        });
 
-            if(name=='')  showAlert('请填写艺术家名称','','');
+        $("#link_btn").click(function() {
+            var name = $("input[name = 'name']").val();
+            var img = $("input[name = 'img']").val();
+            var img_thumb = $("input[name = 'img_thumb']").val();
+            var desc = $("textarea[name = 'desc']").val();
+            var start_price = $("input[name = 'start_price']").val();
+            var each_increase = $("input[name = 'each_increase']").val();
+            var delay_seconds = $("input[name = 'delay_seconds']").val();
+            var reserve_price = $("input[name = 'reserve_price']").val();
+            var margin = $("input[name = 'margin']").val();
+            var content = $("textarea[name = 'content']").val();
+
+            var start_time = $("input[name = 'start_time']").val();
+            var end_time = $("input[name = 'end_time']").val();
+
+            var artwork_class_flag=true;
+            $("#artwork_class_id > input").each(function() {
+                if($(this).is(':checked')) artwork_class_flag=false;
+            });
+
+            var artist_list_flag=true;
+            $("#artist_list_id > input").each(function() {
+                if($(this).is(':checked')) artist_list_flag=false;
+            });
+
+
+            if (name == '' || img == '' || img_thumb == '' || desc == '' || typeof(content) == 'undefined') {
+                showAlert('请填完全', '', '');
+                return false;
+            }
+            if (isNaN(parseInt(start_price)) || isNaN(parseInt(each_increase)) ||
+                    isNaN(parseInt(delay_seconds)) || isNaN(parseInt(reserve_price)) || isNaN(parseInt(margin))) {
+                showAlert('部分字段需要填写数字', '', '');
+                return false;
+            }
+
+            if(artwork_class_flag || artist_list_flag){
+                showAlert('拍品分类和相关艺术家没有选择', '', '');
+                return false;
+            }
+
+            if (start_time == '')  showAlert('开始时间不能为空', '', '');
+            else if (end_time == '')  showAlert('结束时间不能为空', '', '');
+            else if (end_time < start_time)  showAlert('开始时间大于结束时间', '', '');
             else{
                 $.ajax({
-                    url  : "{{URL::to('admin/artist')}}/{{$data->id}}",
-                    type : "PUT",
-                    data : $("#data").serialize()+"&_token={{csrf_token()}}",
+                    url: "{{URL::to('admin/artwork')}}/{{$data->id}}",
+                    type: "PUT",
+                    data: $("#data").serialize() + "&_token={{csrf_token()}}",
                     dataType: "json",
-                    beforeSend:function(){
+                    beforeSend: function () {
                         $(".loading_area").fadeIn();
                     },
-                    success:function(result){
-                        if(result.errorno==30000){
+                    success: function (result) {
+                        if (result.errorno == 30000) {
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg,'{{URL::to('admin/artist')}}','{{URL::to('admin/artist')}}');
+                            showAlert(result.msg, '{{URL::to('admin/artwork')}}', '{{URL::to('admin/artwork')}}');
                         }
                         else {
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg,'','');
+                            showAlert(result.msg, '', '');
                         }
                     }
                 })
