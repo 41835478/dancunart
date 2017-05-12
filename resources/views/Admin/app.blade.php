@@ -51,20 +51,34 @@
             <dl>
                 <dt>拍品管理</dt>
                 <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '3-1') class="active" @endif >拍品列表</a></dd>
+                <dd><a href="{{URL::to('admin/artworkclass')}}" @if ($nav == '3-2') class="active" @endif >拍品分类</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>用户管理</dt>
+                <dd><a href="{{URL::to('admin/user')}}" @if ($nav == '4-1') class="active" @endif >用户列表</a></dd>
+                <dd><a href="{{URL::to('admin/userlog')}}" @if ($nav == '4-2') class="active" @endif >用户修改操作日志</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
-                <dt>交易记录</dt>
+                <dt>订单管理</dt>
+                <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '5-1') class="active" @endif >拍品行为</a></dd>
+                <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '5-1') class="active" @endif >充值记录</a></dd>
+                <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '5-1') class="active" @endif >起拍记录</a></dd>
             </dl>
         </li>
+
+        <li>
+            <dl>
+                <dt>退款管理</dt>
+                <dd><a href="{{URL::to('admin/artwork')}}" @if ($nav == '6-1') class="active" @endif >退款列表</a></dd>
+            </dl>
+        </li>
+
 
 
     </ul>
@@ -107,5 +121,6 @@
 <script src="{{asset('static/timepicker/js/jquery-ui.js')}}"></script>
 <script src="{{asset('static/timepicker/js/jquery-ui-slide.min.js')}}"></script>
 <script src="{{asset('static/timepicker/js/jquery-ui-timepicker-addon.js')}}"></script>
+<script src="{{asset('static/js/validform.5.3.2.min.js')}}"></script>
 
 @yield('footer')

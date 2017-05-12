@@ -28,10 +28,10 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
 
     //后台艺术家路由
     Route::resource('artist','AdminArtistController');
-    //后台艺术家分类路由
     Route::resource('artistclass','AdminArtistClassController');
     //后台拍品路由
     Route::resource('artwork','AdminArtWorkController');
+    Route::resource('artworkclass','AdminArtWorkClassController');
 
     //用户路由
     Route::resource('user','AdminUserController');

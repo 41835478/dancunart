@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ArtistSeeder::class);
         $this->call(ArtWorkSeeder::class);
         $this->call(SiteConfigSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

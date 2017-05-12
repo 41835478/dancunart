@@ -27,6 +27,7 @@ class CreateArtwork extends Migration
             $table->mediumInteger('reserve_price')->comment('保留价');
             $table->mediumInteger('margin')->comment('保证金');
             $table->mediumInteger('buy_num')->comment('出价次数');
+            $table->mediumInteger('now_price')->comment('目前价格');
             $table->dateTime('start_time')->comment('开始时间');
             $table->dateTime('end_time')->comment('结束时间');
             $table->string('artwork_class')->comment('艺术品分类');

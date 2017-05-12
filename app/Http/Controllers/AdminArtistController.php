@@ -16,14 +16,17 @@ class AdminArtistController extends Controller
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
 
-        $data = Artist::paginate(25);
+        $data = Artist::where(function($q) use ($key){
+            if($key) $q->where('name','like','%'.$key.'%')
+                        ->orwhere('nick','like','%'.$key.'%');
+        })->paginate(25);
         $artist_class = ArtistClass::get();
 
-        foreach($data as $key=>$vo){
-            $self_class = explode(',',$data[$key]['art_class']);
+        foreach($data as $keys=>$vo){
+            $self_class = explode(',',$data[$keys]['art_class']);
             foreach($artist_class as $key2=>$vo2){
                 if(in_array($vo2->id,$self_class))
-                    $data[$key]['art_class_name'] .= $vo2->class_name.' ';
+                    $data[$keys]['art_class_name'] .= $vo2->class_name.' ';
             }
         }
 

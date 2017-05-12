@@ -19,7 +19,14 @@ class CreateUser extends Migration
             $table->string('nick',80)->comment('用户名称');
             $table->string('email',50)->comment('用户邮箱');
             $table->string('mob',15)->comment('用户手机');
-            $table->string('user_cash',15)->comment('用户可用余额');
+            $table->string('wechat_openid',32)->comment('绑定微信openid')->default('');
+            $table->string('wechat_avatar',80)->comment('微信头像')->default('');
+            $table->bigInteger('user_cash')->comment('用户可用余额')->default(0);
+            $table->integer('user_exchange_count')->comment('用户充值次数')->default(0);
+            $table->integer('user_auction_count')->comment('用户竞拍总数')->default(0);
+            $table->integer('user_auction_deal')->comment('用户拍得次数')->default(0);
+            $table->integer('user_auction_not_deal')->comment('用户拍得未付款次数')->default(0);
+            $table->boolean('status')->comment('0正常使用，1冻结')->default(0);
             $table->timestamps();
         });
         Schema::create('user_attention', function (Blueprint $table) {

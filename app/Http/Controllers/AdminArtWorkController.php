@@ -19,20 +19,20 @@ class AdminArtWorkController extends Controller
         $data = Artwork::paginate(25);
 
         $artist = Artist::get();
-        foreach($data as $key=>$vo){
-            $self_class = explode(',',$data[$key]['artist']);
+        foreach($data as $key0=>$vo){
+            $self_class = explode(',',$data[$key0]['artist']);
             foreach($artist as $key2=>$vo2){
                 if(in_array($vo2->id,$self_class))
-                    $data[$key]['artist_list'] .= $vo2->name.' ';
+                    $data[$key0]['artist_list'] .= $vo2->name.' ';
             }
         }
 
         $artwork_class = ArtworkClass::get();
-        foreach($data as $key=>$vo){
-            $self_class = explode(',',$data[$key]['art_class']);
+        foreach($data as $key0=>$vo){
+            $self_class = explode(',',$data[$key0]['artwork_class']);
             foreach($artwork_class as $key2=>$vo2){
                 if(in_array($vo2->id,$self_class))
-                    $data[$key]['artwork_class_list'] .= $vo2->class_name.' ';
+                    $data[$key0]['artwork_class_list'] .= $vo2->class_name.' ';
             }
         }
 
