@@ -26,7 +26,7 @@ class CreateUser extends Migration
             $table->integer('user_auction_count')->comment('用户竞拍总数')->default(0);
             $table->integer('user_auction_deal')->comment('用户拍得次数')->default(0);
             $table->integer('user_auction_not_deal')->comment('用户拍得未付款次数')->default(0);
-            $table->boolean('status')->comment('0正常使用，1冻结')->default(0);
+            $table->boolean('status')->comment('0冻结，1正常使用')->default(1);
             $table->timestamps();
         });
         Schema::create('user_attention', function (Blueprint $table) {
@@ -35,6 +35,14 @@ class CreateUser extends Migration
             $table->integer('aid')->comment('艺术家id/拍卖品')->default(0);
             $table->integer('artwork')->comment('拍品id')->default(0);
             $table->boolean('status')->comment('0艺术品，1艺术家')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('user_log',function(Blueprint $table){
+            $table->bigIncrements('id')->comment('自增id');
+            $table->bigInteger('uid')->comment('用户id');
+            $table->string('action')->comment('艺术家id/拍卖品')->default(0);
+            $table->integer('admin_id')->comment('操作者');
             $table->timestamps();
         });
     }
@@ -48,5 +56,6 @@ class CreateUser extends Migration
     {
         Schema::drop('user');
         Schema::drop('user_attention');
+        Schema::drop('user_log');
     }
 }

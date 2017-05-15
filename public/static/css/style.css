@@ -202,3 +202,28 @@ header .rt_nav li .quit_icon:before{content:"Q";}
 #pic_url{display:none; max-width:200px;}
 #upload_btn{  display: none;}
 #img_url{  display: none; max-width:200px;}
+
+
+.Validform_checktip{
+	margin-left:8px;
+	line-height:20px;
+	height:20px;
+	overflow:hidden;
+	color:#999;
+	font-size:12px;
+}
+.Validform_right{
+	color:#71b83d;
+	padding-left:20px;
+}
+.Validform_wrong{
+	color:red;
+	padding-left:20px;
+	white-space:nowrap;
+}
+.Validform_loading{
+	padding-left:20px;
+}
+.Validform_error{
+	background-color:#ffe7e7;
+}

@@ -40,6 +40,7 @@ class AdminLoginController extends Controller
                 //登录成功
 				if($res){
                     Session::put('admin', $name);
+                    Session::put('admin_id', $user_info->id);
                     Session::save();
                     self::json_return(40000);
                 }
@@ -52,6 +53,7 @@ class AdminLoginController extends Controller
 
 	public function loginOut(){
 		Session::forget('admin');
+		Session::forget('admin_id');
 		Session::save();
 		$url = route('adminLogin');
 		header('Location:'.$url);

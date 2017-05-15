@@ -3,39 +3,44 @@
     <section class="rt_wrap content mCustomScrollbar">
         <div class="rt_content">
             <h1>{{$title}}</h1>
-
             <section>
+
                 <form id="data">
 
                     <ul class="ulColumn2">
                         <li>
-                            <span class="item_name" style="width:120px;">用户账号：</span>
-                            <input type="text" class="textbox textbox_295" name="account" datatype="s5-16" errormsg="昵称至少5个字符,最多16个字符！"/>
+                            <span class="item_name " style="width:120px;">用户账号：</span>
+                            <input type="text" class="textbox textbox_295" name="account" datatype="*4-16" nullmsg="请设置账号！" errormsg="账号至少4个字符,最多16个字符！"/>
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;">用户密码：</span>
-                            <input type="text" class="textbox" name="pwd" />
+                            <input type="password" class="textbox" name="pwd" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！"/>
+                        </li>
+
+                        <li>
+                            <span class="item_name" style="width:120px;">确认密码：</span>
+                            <input type="password" class="textbox" datatype="*6-16" recheck="pwd" nullmsg="请再次设置密码！" errormsg="您两次输入的密码不一致！"/>
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;">用户昵称：</span>
-                            <input type="text" class="textbox" name="nick" />
+                            <input type="text" class="textbox" name="nick" datatype="*2-16" nullmsg="请设置昵称！" errormsg="昵称至少2个字符,最多16个字符！"/>
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;">用户邮箱：</span>
-                            <input type="text" class="textbox textbox_295" name="email" />
+                            <input type="text" class="textbox textbox_295" name="email" datatype="e" nullmsg="请设置邮箱！" errormsg="邮箱验证失败"/>
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;">用户手机：</span>
-                            <input type="text" class="textbox textbox_295" name="mob" />
+                            <input type="text" class="textbox textbox_295" name="mob" datatype="m" nullmsg="请设置手机！" errormsg="手机验证失败"/>
                         </li>
 
                         <li>
                             <span class="item_name" style="width:120px;"></span>
-                            <input type="button" class="link_btn" id="link_btn" value="提交"/>
+                            <input type="submit" class="link_btn" value="提交"/>
                         </li>
                     </ul>
 
@@ -46,75 +51,37 @@
     </section>
 @endsection
 @section('footer')
-    <script type="text/javascript" src="http://validform.rjboy.cn/wp-content/themes/validform/js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="http://validform.rjboy.cn/Validform/v5.1/Validform_v5.1_min.js"></script>
     <script>
-        $(function(){
-            //$(".registerform").Validform();  //就这一行代码！;
-
-            var demo=$("#data").Validform({
-                tiptype:3,
-                label:".label",
-                showAllError:true,
-                datatype:{
-                    "zh1-6":/^[\u4E00-\u9FA5\uf900-\ufa2d]{1,6}$/
-                },
-                ajaxPost:true
+        $(function() {
+            $("#data").Validform({
+                tiptype: 3,
+                ajaxPost: true,
+                beforeSubmit: function () {
+                    ajax_send();
+                    return false;
+                }
             });
-
-            //通过$.Tipmsg扩展默认提示信息;
-            //$.Tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
-//            demo.tipmsg.w["zh1-6"]="请输入1到6个中文字符！";
-
-            demo.addRule([{
-                ele:".inputxt:eq(0)",
-                datatype:"zh2-4"
-            },
-                {
-                    ele:".inputxt:eq(1)",
-                    datatype:"*6-20"
-                },
-                {
-                    ele:".inputxt:eq(2)",
-                    datatype:"*6-20",
-                    recheck:"userpassword"
-                },
-                {
-                    ele:"select",
-                    datatype:"*"
-                },
-                {
-                    ele:":radio:first",
-                    datatype:"*"
-                },
-                {
-                    ele:":checkbox:first",
-                    datatype:"*"
-                }]);
-
-        })
-
-        $("#link_btn").click(function(){
-            var name = $("input[name = 'class_name']").val();
-
-            if(name=='')  showAlert('请填写分类名称','','');
-            else{
+//            $(".link_btn").click(function(){
+//                ajax_send();
+//                return false;
+//            })
+            function ajax_send() {
                 $.ajax({
-                    url  : "{{URL::to('admin/artistclass')}}",
-                    type : "post",
-                    data : $("#data").serialize()+"&_token={{csrf_token()}}",
+                    url: "{{URL::to('admin/user')}}",
+                    type: "post",
+                    data: $("#data").serialize() + "&_token={{csrf_token()}}",
                     dataType: "json",
-                    beforeSend:function(){
+                    beforeSend: function () {
                         $(".loading_area").fadeIn();
                     },
-                    success:function(result){
-                        if(result.errorno==20000){
+                    success: function (result) {
+                        if (result.errorno == 20000) {
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg,'{{URL::to('admin/artistclass')}}','{{URL::to('admin/artistclass')}}');
+                            showAlert(result.msg, '{{URL::to('admin/user')}}', '{{URL::to('admin/user')}}');
                         }
                         else {
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg,'','');
+                            showAlert(result.msg, '', '');
                         }
                     }
                 })

@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::resource('artworkclass','AdminArtWorkClassController');
 
     //用户路由
+    Route::get('userLog','AdminUserController@userlog');
     Route::resource('user','AdminUserController');
 
     //后台主页路由

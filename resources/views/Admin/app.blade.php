@@ -59,7 +59,7 @@
             <dl>
                 <dt>用户管理</dt>
                 <dd><a href="{{URL::to('admin/user')}}" @if ($nav == '4-1') class="active" @endif >用户列表</a></dd>
-                <dd><a href="{{URL::to('admin/userlog')}}" @if ($nav == '4-2') class="active" @endif >用户修改操作日志</a></dd>
+                <dd><a href="{{URL::to('admin/userLog')}}" @if ($nav == '4-2') class="active" @endif >用户修改操作日志</a></dd>
             </dl>
         </li>
 
