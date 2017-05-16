@@ -11,6 +11,6 @@ class SiteConfigSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('site_config')->insert(['role'=>'兑换规则123456']);
     }
 }

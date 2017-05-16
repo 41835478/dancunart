@@ -27,6 +27,7 @@
                         <th>参与竞拍次数</th>
                         <th>成功拍得次数</th>
                         <th>拍得未付款次数</th>
+                        <th>关注统计</th>
                         <th>状态</th>
                         <th>操作</th>
                     </tr>
@@ -46,6 +47,7 @@
                             <td>{{ $rs->user_auction_count }}次</td>
                             <td>{{ $rs->user_auction_deal }}次</td>
                             <td>{{ $rs->user_auction_not_deal }}次</td>
+                            <td>@if($rs->attention){{$rs->attention}}个 @else 无关注 @endif</td>
                             <td>@if($rs->status == '') 冻结 @else 正常 @endif</td>
                             <td>
                                 <a href="{{URL::to('admin/user')}}/{{ $rs->id }}/edit">修改</a>
@@ -59,6 +61,12 @@
 
 @endsection
 @section('footer')
+        <script>
+            $("#search").click(function(){
+                var key = $("input[name = 'keywords']").val();
+                window.location.href="{{URL::to('admin/user')}}?key="+key;
+            })
+        </script>
     </body>
     </html>
 @endsection

@@ -36,22 +36,22 @@
 
                         <li>
                             <span class="item_name" style="width:120px;">起拍价：</span>
-                            <input type="number" class="textbox" name="start_price" value="{{$data->start_price}}"/> 单位：元
+                            <input type="number" class="textbox" name="start_price" value="{{$data->start_price/100}}"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">加价幅度：</span>
-                            <input type="number" class="textbox" name="each_increase" value="{{$data->each_increase}}"/> 单位：元
+                            <input type="number" class="textbox" name="each_increase" value="{{$data->each_increase/100}}"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">延迟周期：</span>
                             <input type="number" class="textbox" name="delay_seconds" value="{{$data->delay_seconds}}"/> 单位：分
                         </li><li>
                             <span class="item_name" style="width:120px;">保留价：</span>
-                            <input type="number" class="textbox" name="reserve_price" value="{{$data->reserve_price}}"/> 单位：元
+                            <input type="number" class="textbox" name="reserve_price" value="{{$data->reserve_price/100}}"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">保证金：</span>
-                            <input type="number" class="textbox" name="margin" value="{{$data->margin}}"/> 单位：元
+                            <input type="number" class="textbox" name="margin" value="{{$data->margin/100}}"/> 单位：元
                         </li>
 
                         <li class="time_handle">

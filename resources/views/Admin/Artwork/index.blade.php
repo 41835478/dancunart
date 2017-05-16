@@ -40,11 +40,11 @@
                             <td>{{ $rs->artist_list }}</td>
                             <td><img src="{{asset($rs->img_thumb)}}" /></td>
                             <td>{{ $rs->artwork_class_list }}</td>
-                            <td>{{ $rs->start_price }}元</td>
-                            <td>{{ $rs->each_increase }}元</td>
-                            <td>{{ $rs->reserve_price }}元</td>
+                            <td>{{ $rs->start_price/100 }}元</td>
+                            <td>{{ $rs->each_increase/100 }}元</td>
+                            <td>{{ $rs->reserve_price/100 }}元</td>
                             <td>{{ $rs->delay_seconds }}分钟</td>
-                            <td>{{ $rs->margin }}元</td>
+                            <td>{{ $rs->margin/100 }}元</td>
                             <td>{{ $rs->buy_num }}</td>
                             <td>@if($rs->status)上架展示@else 不展示 @endif</td>
                             <td>

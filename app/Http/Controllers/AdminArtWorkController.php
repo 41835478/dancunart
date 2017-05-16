@@ -28,6 +28,7 @@ class AdminArtWorkController extends Controller
         }
 
         $artwork_class = ArtworkClass::get();
+
         foreach($data as $key0=>$vo){
             $self_class = explode(',',$data[$key0]['artwork_class']);
             foreach($artwork_class as $key2=>$vo2){
@@ -61,7 +62,11 @@ class AdminArtWorkController extends Controller
     public function store(){
         $data = Request::all();
         unset($data['_token']);
-        unset($data['artwork_class']);
+
+        $data['start_price'] *= 100;
+        $data['each_increase'] *= 100;
+        $data['reserve_price'] *= 100;
+        $data['margin'] *= 100;
 
         DB::beginTransaction();
             //给相关艺术家新增关联
@@ -111,6 +116,12 @@ class AdminArtWorkController extends Controller
     public function update($id){
         $data = Request::all();
         unset($data['_token']);
+
+        $data['start_price'] *= 100;
+        $data['each_increase'] *= 100;
+        $data['reserve_price'] *= 100;
+        $data['margin'] *= 100;
+
         $data['artist'] = array_values($data['artist']);
         $artist = Artwork::where('id',$id)->pluck('artist')->toarray();
 

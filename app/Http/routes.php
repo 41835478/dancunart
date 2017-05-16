@@ -10,11 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/**
+ * 前台路由
+ */
 
+Route::group(['middleware' => ['web']],function(){
+    Route::get('userAttention/{status?}/{id?}','AppUserController@attention');
+});
+
+/**
+ * 后台路由
+ */
 Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
-    /**
-	 * 后台路由
-	 */
     //后台登录相关路由
     Route::get('login','AdminLoginController@login')->name('adminLogin');
     Route::post('login','AdminLoginController@loginCheck');
@@ -32,6 +39,11 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //后台拍品路由
     Route::resource('artwork','AdminArtWorkController');
     Route::resource('artworkclass','AdminArtWorkClassController');
+    //后台订单路由
+    Route::get('orderRecharge','AdminOrderController@recharge');
+    Route::get('orderAuction','AdminOrderController@auchtion');
+    Route::get('orderWithdraw','AdminOrderController@withdraw');
+    Route::post('withdraw/{id?}','AdminOrderController@withdrawhandle');
 
     //用户路由
     Route::get('userLog','AdminUserController@userlog');

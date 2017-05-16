@@ -16,10 +16,7 @@ class AdminUserController extends Controller
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
 
-        $data = User::where(function($q) use ($key){
-            if($key) $q->where('account','like','%'.$key.'%')
-                ->orwhere('nick','like','%'.$key.'%');
-        })->paginate(25);
+        $data = User::getAllUser($key);
 
         return view('Admin.User.index',compact('title','key','nav','searchitem','data'));
     }
