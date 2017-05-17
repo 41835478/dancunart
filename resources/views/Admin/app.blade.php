@@ -28,9 +28,9 @@
     <ul id="left_nav">
         <li>
             <dl>
-                <dt onClick="window.location.href='{{URL::to('admin/conf')}}'">系统设置</dt>
-                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-1') class="active" @endif >活动配置</a></dd>
-                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-2') class="active" @endif >合作单位</a></dd>
+                <dt>系统设置</dt>
+                <dd><a href="{{URL::to('admin/siteConfig')}}" @if ($nav == '1-1') class="active" @endif >活动配置</a></dd>
+                <dd><a href="{{URL::to('admin/siteFriendlink')}}" @if ($nav == '1-2') class="active" @endif >友情链接</a></dd>
                 <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-3') class="active" @endif >排行榜</a></dd>
                 <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-4') class="active" @endif >客服配置</a></dd>
                 {{--<dd><a href="{{URL::to('Roll/config')}}" @if ($nav == '1-2') class="active" @endif >普通奖品池</a></dd>--}}

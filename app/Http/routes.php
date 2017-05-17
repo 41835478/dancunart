@@ -30,6 +30,11 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //上传图片路由
     Route::post('upload','AdminUploadController@upload');
 
+    //网站配置
+    Route::resource('siteConfig','AdminSiteConfigController');
+    Route::resource('siteFriendlink','AdminSiteFriendlinkController');
+    Route::resource('siteFriendlink','AdminSiteFriendlinkController');
+
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
 
