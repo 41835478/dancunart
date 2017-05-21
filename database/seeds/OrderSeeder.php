@@ -11,9 +11,22 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('order_recharge')->insert([
+        DB::table('order')->insert([
             'order_id'=>'ex1426123458632',
             'uid'=>1,
+            'pay_money'=>10000,
+            'pay_way'=>'wechat',
+            'flag'=>1,
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('order')->insert([
+            'order_id'=>'re1426123458632',
+            'uid'=>1,
+            'pay_money'=>20000,
+            'pay_way'=>'alipay',
+            'status'=>1,
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ]);

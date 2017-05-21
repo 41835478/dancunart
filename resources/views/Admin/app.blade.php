@@ -59,14 +59,13 @@
             <dl>
                 <dt>用户管理</dt>
                 <dd><a href="{{URL::to('admin/user')}}" @if ($nav == '4-1') class="active" @endif >用户列表</a></dd>
-                <dd><a href="{{URL::to('admin/userLog')}}" @if ($nav == '4-2') class="active" @endif >用户修改操作日志</a></dd>
             </dl>
         </li>
 
         <li>
             <dl>
                 <dt>订单管理</dt>
-                <dd><a href="{{URL::to('admin/orderRecharge')}}" @if ($nav == '5-1') class="active" @endif >充值记录</a></dd>
+                <dd><a href="{{URL::to('admin/order')}}" @if ($nav == '5-1') class="active" @endif >订单列表</a></dd>
                 <dd><a href="{{URL::to('admin/orderAuction')}}" @if ($nav == '5-2') class="active" @endif >拍品记录</a></dd>
             </dl>
         </li>
@@ -77,6 +76,15 @@
                 <dd><a href="{{URL::to('admin/orderWithdraw')}}" @if ($nav == '6-1') class="active" @endif >提现申请</a></dd>
             </dl>
         </li>
+
+        <li>
+            <dl>
+                <dt>管理员操作日志</dt>
+                <dd><a href="{{URL::to('admin/user/Log')}}" @if ($nav == '7-1') class="active" @endif >敏感操作日志</a></dd>
+            </dl>
+        </li>
+
+
 
 
 

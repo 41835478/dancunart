@@ -12,12 +12,19 @@ class CreateOrder extends Migration
      */
     public function up()
     {
-        //充值订单
-        Schema::create('order_recharge',function(Blueprint $table){
+        //交易总表
+        Schema::create('order',function(Blueprint $table){
             $table->bigIncrements('id')->comment('自增id');
             $table->string('order_id',20)->comment('订单号');
+            $table->bigInteger('artwork_id')->comment('拍品id')->default(0);
             $table->bigInteger('uid')->comment('用户id');
+            $table->Integer('pay_money')->comment('支付金额');
+            $table->string('pay_way',10)->comment('支付方式');
+            $table->boolean('flag')->comment('0：充值，1:付尾款')->default(0);
             $table->boolean('status')->comment('0：未支付，1:已支付')->default(0);
+            $table->char('send_flag')->comment('0：未发送，1:已发送，2：已签收')->default(0);
+            $table->bigInteger('address_id')->comment('地址编号')->default(0);
+            $table->string('express_no',20)->comment('快递单号')->default('');
             $table->timestamps();
         });
 
@@ -50,7 +57,7 @@ class CreateOrder extends Migration
      */
     public function down()
     {
-        Schema::drop('order_recharge');
+        Schema::drop('order');
         Schema::drop('order_auction');
         Schema::drop('order_withdraw');
     }

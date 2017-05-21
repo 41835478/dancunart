@@ -33,7 +33,6 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //网站配置
     Route::resource('siteConfig','AdminSiteConfigController');
     Route::resource('siteFriendlink','AdminSiteFriendlinkController');
-    Route::resource('siteFriendlink','AdminSiteFriendlinkController');
 
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
@@ -45,13 +44,15 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::resource('artwork','AdminArtWorkController');
     Route::resource('artworkclass','AdminArtWorkClassController');
     //后台订单路由
-    Route::get('orderRecharge','AdminOrderController@recharge');
+    Route::get('order','AdminOrderController@index');
     Route::get('orderAuction','AdminOrderController@auchtion');
     Route::get('orderWithdraw','AdminOrderController@withdraw');
     Route::post('withdraw/{id?}','AdminOrderController@withdrawhandle');
+    Route::post('order/{id?}','AdminOrderController@orderhandle');
 
     //用户路由
-    Route::get('userLog','AdminUserController@userlog');
+    Route::get('user/Log','AdminUserController@userlog');
+    Route::get('user/accountset/{id?}/{nav?}','AdminUserController@accountset');
     Route::resource('user','AdminUserController');
 
     //后台主页路由

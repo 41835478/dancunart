@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Request;
-use App\Http\Model\OrderRechargeModel as Recharge;
+use Request,DB,Session;
+use App\Http\Model\OrderModel as Order;
 use App\Http\Model\OrderAuchtionModel as Auchtion;
 use App\Http\Model\OrderWithdrawModel as Withdraw;
+use App\Http\Model\UserLogModel as UserLog;
 class AdminOrderController extends Controller
 {
-    public function recharge(){
-        $title = "充值记录";
+    public function index(){
+        $title = "订单列表";
         $nav   = '5-1';
         $key=Request::input('key','');
 
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
 
-        $data = Recharge::getAll($key);
+        $data = Order::getAll($key);
 
-        return view('Admin.Order.recharge',compact('title','key','nav','searchitem','data'));
+        return view('Admin.Order.index',compact('title','key','nav','searchitem','data'));
     }
     public function auchtion(){
         $title = "拍卖记录";
@@ -56,5 +57,25 @@ class AdminOrderController extends Controller
 
         if($return) self::json_return(30000);
         else self::json_return(30001);
+    }
+
+    public function orderhandle($id){
+        $admin_id=Session::get('admin_id');
+        $order_info = Order::find($id);
+        $action  = "修改用户订单 ".$order_info->order_id." 状态为 已支付 （".($order_info->pay_money/100)." 元）";
+
+        DB::beginTransaction();
+        $res1 = UserLog::insertLog($order_info->uid,$action,$admin_id);
+        $res2 = Order::change_status($id);
+
+        if($res1 && $res2 ) {
+            DB::commit();
+            self::json_return(30000);
+        }
+
+        else {
+            DB::rollback();
+            self::json_return(30001);
+        }
     }
 }

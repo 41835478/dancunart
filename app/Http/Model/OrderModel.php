@@ -4,9 +4,9 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderRechargeModel extends Model
+class OrderModel extends Model
 {
-    protected $table='order_recharge';
+    protected $table='order';
 
     public static function getAll($key){
         $order  = new self;
@@ -18,5 +18,11 @@ class OrderRechargeModel extends Model
             })
             ->select($order->table.'.*','u.account','u.nick')
             ->paginate(25);
+    }
+
+    public static function change_status($id){
+        $order = self::where('id',$id)->where('status',0)->first();
+        $order->status = 1;
+        return $order->save();
     }
 }

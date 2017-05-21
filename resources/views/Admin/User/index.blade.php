@@ -51,6 +51,7 @@
                             <td>@if($rs->status == '') 冻结 @else 正常 @endif</td>
                             <td>
                                 <a href="{{URL::to('admin/user')}}/{{ $rs->id }}/edit">修改</a>
+                                <a href="{{URL::to('admin/user')}}/accountset/{{ $rs->id }}/{{$nav}}">收款账户</a>
                             </td>
                         </tr>
                     @endforeach

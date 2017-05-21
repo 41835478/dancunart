@@ -28,5 +28,32 @@ class UserSeeder extends Seeder
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),
         ]);
+
+        DB::table('user_accountset')->insert([
+            'uid' => '1',
+            'flag'=> '1',
+            'bank_payee' => '张三',
+            'bank_name'=> '中国邮政',
+            'accountnumber'=>'6555555555555555',
+            'province'=>'陕西',
+            'city'=>'西安',
+            'branchname'=>'电子二路支行',
+            'status' => '1',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('user_address')->insert([
+            'uid' => '1',
+            'province'=> '陕西',
+            'city' => '西安',
+            'area'=>'雁塔区',
+            'detail'=> '锦业路',
+            'consignor'=>'张三',
+            'mob'=>'电话',
+            'remark'=>'备注',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
     }
 }

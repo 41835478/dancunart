@@ -105,7 +105,7 @@ class AdminUserController extends Controller
     public function userlog(){
 
         $title = "用户操作日志管理";
-        $nav   = '4-2';
+        $nav   = '7-1';
         $key=Request::input('key','');
 
         $searchitem = [];
@@ -122,4 +122,12 @@ class AdminUserController extends Controller
         return UserLog::insertLog($uid,$action,$admin_id);
     }
 
+    public function accountset($id,$nav){
+        $userinfo = DB::table('user')->where('id',$id)->first();
+        $data = DB::table('user_accountset')->where('uid',$id)->get();
+
+        $title = $userinfo->account.'('.$userinfo->nick.') 收款账户';
+        $nav   = $nav;
+        return view('Admin.User.accountset',compact('title','nav','data'));
+    }
 }

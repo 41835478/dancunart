@@ -7,7 +7,7 @@
 
                 <input type="text" name="keywords" class="textbox" placeholder="订单号/用户账号..." value="{{$key}}"/>
                 <input type="button" value="查询" class="group_btn" id="search"/>
-                <input type="button" value="重置" onClick="window.location.href='{{URL::to('admin/orderWithdraw')}}'" class="group_btn"/>
+                <input type="button" value="重置" onClick="window.location.href='{{URL::to('admin/order')}}'" class="group_btn"/>
 
             </section>
             <hr />
@@ -15,36 +15,31 @@
                 <table class="table">
                     <tr>
                         <th>编号</th>
+                        <th>订单号</th>
                         <th>用户</th>
-                        <th>提现之前余额</th>
-                        <th>本次提现金额</th>
+                        <th>本单金额</th>
+                        <th>支付方式</th>
+                        <th>支付方式</th>
                         <th>状态</th>
-                        <th>收款账户</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
+                        <th>操作</th>
                     </tr>
 
                     @foreach ($data as $key=>$rs)
                         <tr>
                             <td>{{ $rs->id }}</td>
+                            <td>{{ $rs->order_id }}</td>
                             <td>{{ $rs->account }}({{$rs->nick}})</td>
-                            <td>{{ $rs->old_cash/100 }}</td>
-                            <td>{{ $rs->withdraw_price/100 }}</td>
-                            <td>
-                                @if($rs->status==0)审核中
-                                <a href="javascript:;" onClick="ajax_withdraw('check',{{ $rs->id }})" class="inner_btn">审核</a>
-                                <a href="javascript:;" onClick="ajax_withdraw('pass',{{ $rs->id }})" class="inner_btn">驳回</a>
-                                @elseif($rs->status==1)已提现
-                                {{--<a href="javascript:;" onClick="ajax_withdraw('reset',{{ $rs->id }})" class="inner_btn">重置</a>--}}
-                                @elseif($rs->status==2)已驳回
-                                {{--<a href="javascript:;" onClick="ajax_withdraw('reset',{{ $rs->id }})" class="inner_btn">重置</a>--}}
-                                @else -
-                                @endif
-                            </td>
-                            <td><a href="{{URL::to('admin/user')}}/accountset/{{ $rs->id }}/{{$nav}}">收款账户</a></td>
+                            <td>{{ $rs->pay_money }}</td>
+                            <td>{{ $rs->pay_way }}</td>
+                            <td>@if($rs->flag) 付尾款 @else 充押金 @endif</td>
+                            <td>@if($rs->status) 已支付 @else 未支付 @endif</td>
                             <td>{{ $rs->created_at }}</td>
                             <td>{{ $rs->updated_at }}</td>
-
+                            <td>@if($rs->flag && $rs->status && $rs->send_flag==0) 去发货 @endif
+                                @if(!$rs->status) <a href="javascript:;" onClick="ajax_pay({{ $rs->id }})" class="inner_btn">修改状态</a> @endif
+                            </td>
                         </tr>
                     @endforeach
                 </table>
@@ -57,22 +52,17 @@
     <script>
         $("#search").click(function(){
             var key = $("input[name = 'keywords']").val();
-            window.location.href="{{URL::to('admin/orderRecharge')}}?key="+key;
+            window.location.href="{{URL::to('admin/order')}}?key="+key;
         })
 
-        function ajax_withdraw(flag,id) {
-            if(flag=='check')
-                var res = confirm("确定审核该提现记录？");
-            else if(flag=='pass')
-                var res = confirm("确定驳回该提现记录？");
-            else if(flag=='reset')
-                var res = confirm("确定重置该提现记录？用户的钱会被加回去");
+        function ajax_pay(id) {
+            var res = confirm("确定该订单已通过其他渠道支付？");
 
             if (res == true) {
                 $.ajax({
-                    url: "{{URL::to('admin/withdraw')}}/"+id,
+                    url: "{{URL::to('admin/order')}}/"+id,
                     type: "post",
-                    data: "flag=" + flag + "&_token={{csrf_token()}}",
+                    data: "&_token={{csrf_token()}}",
                     dataType: "json",
                     beforeSend: function () {
                         $(".loading_area").fadeIn();
@@ -81,7 +71,7 @@
                         console.log(result);
                         if (result.errorno == 30000) {
                             $(".loading_area").fadeOut(1500);
-                            showAlert(result.msg, '{{URL::to('admin/orderWithdraw')}}', '{{URL::to('admin/orderWithdraw')}}');
+                            showAlert(result.msg, '{{URL::to('admin/order')}}', '{{URL::to('admin/order')}}');
                         }
                         else {
                             $(".loading_area").fadeOut(1500);
