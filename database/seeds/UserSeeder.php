@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             'area'=>'雁塔区',
             'detail'=> '锦业路',
             'consignor'=>'张三',
-            'mob'=>'电话',
+            'mob'=>'13111111111',
             'remark'=>'备注',
             'created_at'=>date('Y-m-d H:i:s'),
             'updated_at'=>date('Y-m-d H:i:s'),

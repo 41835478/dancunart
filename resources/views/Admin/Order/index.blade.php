@@ -16,6 +16,7 @@
                     <tr>
                         <th>编号</th>
                         <th>订单号</th>
+                        <th>拍品名称</th>
                         <th>用户</th>
                         <th>本单金额</th>
                         <th>支付方式</th>
@@ -30,6 +31,7 @@
                         <tr>
                             <td>{{ $rs->id }}</td>
                             <td>{{ $rs->order_id }}</td>
+                            <td>{{ $rs->artwork_name }}</td>
                             <td>{{ $rs->account }}({{$rs->nick}})</td>
                             <td>{{ $rs->pay_money }}</td>
                             <td>{{ $rs->pay_way }}</td>
@@ -37,7 +39,7 @@
                             <td>@if($rs->status) 已支付 @else 未支付 @endif</td>
                             <td>{{ $rs->created_at }}</td>
                             <td>{{ $rs->updated_at }}</td>
-                            <td>@if($rs->flag && $rs->status && $rs->send_flag==0) 去发货 @endif
+                            <td>@if($rs->flag && $rs->status && $rs->send_flag==0) <a href="orderExpress/{{ $rs->id }}/edit" class="inner_btn">去发货</a> @endif
                                 @if(!$rs->status) <a href="javascript:;" onClick="ajax_pay({{ $rs->id }})" class="inner_btn">修改状态</a> @endif
                             </td>
                         </tr>

@@ -61,10 +61,7 @@
                     return false;
                 }
             });
-//            $(".link_btn").click(function(){
-//                ajax_send();
-//                return false;
-//            })
+
             function ajax_send() {
                 $.ajax({
                     url: "{{URL::to('admin/user')}}",

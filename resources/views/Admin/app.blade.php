@@ -33,6 +33,7 @@
                 <dd><a href="{{URL::to('admin/siteFriendlink')}}" @if ($nav == '1-2') class="active" @endif >友情链接</a></dd>
                 <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-3') class="active" @endif >排行榜</a></dd>
                 <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-4') class="active" @endif >客服配置</a></dd>
+                <dd><a href="{{URL::to('admin/ExpressList')}}" @if ($nav == '1-5') class="active" @endif >快递配置</a></dd>
                 {{--<dd><a href="{{URL::to('Roll/config')}}" @if ($nav == '1-2') class="active" @endif >普通奖品池</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/dajiang')}}"  @if ($nav == '1-3') class="active" @endif >行列大奖</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/log')}}" @if ($nav == '1-4') class="active" @endif >日志列表</a></dd>--}}
@@ -66,7 +67,8 @@
             <dl>
                 <dt>订单管理</dt>
                 <dd><a href="{{URL::to('admin/order')}}" @if ($nav == '5-1') class="active" @endif >订单列表</a></dd>
-                <dd><a href="{{URL::to('admin/orderAuction')}}" @if ($nav == '5-2') class="active" @endif >拍品记录</a></dd>
+                <dd><a href="{{URL::to('admin/orderExpress')}}" @if ($nav == '5-2') class="active" @endif >发货单列表</a></dd>
+                <dd><a href="{{URL::to('admin/orderAuction')}}" @if ($nav == '5-3') class="active" @endif >参拍记录</a></dd>
             </dl>
         </li>
 

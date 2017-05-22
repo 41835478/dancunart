@@ -23,8 +23,7 @@ class CreateOrder extends Migration
             $table->boolean('flag')->comment('0：充值，1:付尾款')->default(0);
             $table->boolean('status')->comment('0：未支付，1:已支付')->default(0);
             $table->char('send_flag')->comment('0：未发送，1:已发送，2：已签收')->default(0);
-            $table->bigInteger('address_id')->comment('地址编号')->default(0);
-            $table->string('express_no',20)->comment('快递单号')->default('');
+            $table->bigInteger('address_id')->comment('地址id')->default(0);
             $table->timestamps();
         });
 
@@ -48,6 +47,24 @@ class CreateOrder extends Migration
             $table->timestamps();
         });
 
+        //发货单（日志）
+        Schema::create('order_express',function(Blueprint $table){
+            $table->bigIncrements('id')->comment('自增id');
+            $table->bigInteger('uid')->comment('用户id');
+            $table->bigInteger('oid')->comment('订单id');
+            $table->string('express_no',20)->comment('快递单号')->default('');
+            $table->string('express_name',20)->comment('快递名称')->default('');
+            $table->timestamps();
+        });
+
+        //快递列表
+        Schema::create('express_list',function(Blueprint $table){
+            $table->increments('id')->comment('自增id');
+            $table->string('express_name',15)->comment('快递名称');
+            $table->boolean('status')->comment('状态，1展示，0不展示')->default(1);
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -60,5 +77,7 @@ class CreateOrder extends Migration
         Schema::drop('order');
         Schema::drop('order_auction');
         Schema::drop('order_withdraw');
+        Schema::drop('order_express');
+        Schema::drop('express_list');
     }
 }

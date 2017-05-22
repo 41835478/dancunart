@@ -7,9 +7,11 @@ use App\Http\Model\OrderModel as Order;
 use App\Http\Model\OrderAuchtionModel as Auchtion;
 use App\Http\Model\OrderWithdrawModel as Withdraw;
 use App\Http\Model\UserLogModel as UserLog;
+use App\Http\Model\OrderExpressModel as OrderExpress;
+use App\Http\Model\ExpressListModel as Express;
 class AdminOrderController extends Controller
 {
-    public function index(){
+    public function order(){
         $title = "订单列表";
         $nav   = '5-1';
         $key=Request::input('key','');
@@ -22,8 +24,8 @@ class AdminOrderController extends Controller
         return view('Admin.Order.index',compact('title','key','nav','searchitem','data'));
     }
     public function auchtion(){
-        $title = "拍卖记录";
-        $nav   = '5-2';
+        $title = "参拍记录";
+        $nav   = '5-3';
         $key=Request::input('key','');
 
         $searchitem = [];
@@ -77,5 +79,31 @@ class AdminOrderController extends Controller
             DB::rollback();
             self::json_return(30001);
         }
+    }
+
+    //--------订单物流相关操作
+    public function index(){
+        $title = "发货单列表";
+        $nav   = '5-2';
+        $key=Request::input('key','');
+
+        $searchitem = [];
+        if($key) $searchitem['key'] = $key;
+
+        $data = OrderExpress::getAll($key);
+
+        return view('Admin.OrderExpress.index',compact('title','key','nav','searchitem','data'));
+    }
+
+    public function edit($id){
+        $title = "新增发货单";
+        $nav   = '5-2';
+        $data = Order::getOne($id);
+        $option = Express::showlist();
+        $option_list = "<option value>请选择快递公司</option>";
+        foreach($option as $key=>$vo){
+            $option_list.="<option value='{$vo->id}'>{$vo->express_name}</option>";
+        }
+        return view('Admin.OrderExpress.add',compact('title','nav','option_list','data'));
     }
 }

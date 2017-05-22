@@ -26,8 +26,8 @@ class CreateArtwork extends Migration
             $table->char('delay_seconds',5)->comment('延时周期,单位分钟');
             $table->mediumInteger('reserve_price')->comment('保留价');
             $table->mediumInteger('margin')->comment('保证金');
-            $table->mediumInteger('buy_num')->comment('出价次数');
-            $table->mediumInteger('now_price')->comment('目前价格');
+            $table->mediumInteger('buy_num')->comment('出价次数')->default(0);
+            $table->mediumInteger('now_price')->comment('目前价格')->default(0);
             $table->dateTime('start_time')->comment('开始时间');
             $table->dateTime('end_time')->comment('结束时间');
             $table->string('artwork_class')->comment('艺术品分类');
