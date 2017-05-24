@@ -34,6 +34,7 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::resource('siteConfig','AdminSiteConfigController');
     Route::resource('siteFriendlink','AdminSiteFriendlinkController');
     Route::resource('ExpressList','AdminExpressListController');
+    Route::resource('CSR','AdminCSRController');
 
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::post('withdraw/{id?}','AdminOrderController@withdrawhandle');
     Route::post('order/{id?}','AdminOrderController@orderhandle');
 
+    Route::get('orderExpress/invalid/{id?}','AdminOrderController@invalid');
     Route::resource('orderExpress','AdminOrderController');
 
     //用户路由

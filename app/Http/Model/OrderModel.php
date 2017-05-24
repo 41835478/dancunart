@@ -32,9 +32,22 @@ class OrderModel extends Model
             ->first();
     }
 
-    public static function change_status($id){
+    public static function changeStatus($id){
         $order = self::where('id',$id)->where('status',0)->first();
         $order->status = 1;
         return $order->save();
     }
+
+    public static function changeSendFlag($id){
+        $order = self::where('id',$id)->where('send_flag',0)->first();
+        $order->send_flag = 1;
+        return $order->save();
+    }
+
+    public static function InitSendFlag($oid){
+        $order = self::where('id',$oid)->where('send_flag',1)->first();
+        $order->send_flag = 0;
+        return $order->save();
+    }
+
 }

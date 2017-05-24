@@ -19,9 +19,10 @@
                         <th>拍品名称</th>
                         <th>用户</th>
                         <th>本单金额</th>
-                        <th>支付方式</th>
-                        <th>支付方式</th>
+                        <th>支付来源</th>
+                        <th>订单用途</th>
                         <th>状态</th>
+                        <th>发货状态</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th>操作</th>
@@ -37,9 +38,10 @@
                             <td>{{ $rs->pay_way }}</td>
                             <td>@if($rs->flag) 付尾款 @else 充押金 @endif</td>
                             <td>@if($rs->status) 已支付 @else 未支付 @endif</td>
+                            <td>@if($rs->send_flag==1) 已发送 @elseif($rs->send_flag==2) 已签收 @else 未发送 @endif</td>
                             <td>{{ $rs->created_at }}</td>
                             <td>{{ $rs->updated_at }}</td>
-                            <td>@if($rs->flag && $rs->status && $rs->send_flag==0) <a href="orderExpress/{{ $rs->id }}/edit" class="inner_btn">去发货</a> @endif
+                            <td>@if($rs->flag && $rs->status && $rs->send_flag==0) <a href="{{URL::to('admin/orderExpress/create')}}?id={{ $rs->id }}" class="inner_btn">去发货</a> @endif
                                 @if(!$rs->status) <a href="javascript:;" onClick="ajax_pay({{ $rs->id }})" class="inner_btn">修改状态</a> @endif
                             </td>
                         </tr>

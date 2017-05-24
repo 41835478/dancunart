@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request,DB,Session;
+use Request,DB,Session,Validator;
 use App\Http\Model\OrderModel as Order;
 use App\Http\Model\OrderAuchtionModel as Auchtion;
 use App\Http\Model\OrderWithdrawModel as Withdraw;
@@ -68,7 +68,25 @@ class AdminOrderController extends Controller
 
         DB::beginTransaction();
         $res1 = UserLog::insertLog($order_info->uid,$action,$admin_id);
-        $res2 = Order::change_status($id);
+        $res2 = Order::changeStatus($id);
+
+        if($res1 && $res2 ) {
+            DB::commit();
+            self::json_return(30000);
+        }
+
+        else {
+            DB::rollback();
+            self::json_return(30001);
+        }
+    }
+
+    public function invalid($id){
+        $oid = OrderExpress::where('id',$id)->first();
+        $oid = $oid->oid;
+        DB::beginTransaction();
+        $res1 = OrderExpress::changeStatus($id);
+        $res2 = Order::InitSendFlag($oid);
 
         if($res1 && $res2 ) {
             DB::commit();
@@ -89,21 +107,52 @@ class AdminOrderController extends Controller
 
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
-
         $data = OrderExpress::getAll($key);
 
         return view('Admin.OrderExpress.index',compact('title','key','nav','searchitem','data'));
     }
 
-    public function edit($id){
+    public function create(){
         $title = "新增发货单";
         $nav   = '5-2';
+        $id = Request::input('id',0);
         $data = Order::getOne($id);
         $option = Express::showlist();
         $option_list = "<option value>请选择快递公司</option>";
         foreach($option as $key=>$vo){
-            $option_list.="<option value='{$vo->id}'>{$vo->express_name}</option>";
+            $option_list.="<option value='{$vo->express_name}'>{$vo->express_name}</option>";
         }
         return view('Admin.OrderExpress.add',compact('title','nav','option_list','data'));
+    }
+
+    public function store(){
+        $data = Request::all();
+        unset($data['_token']);
+
+        $validator = Validator::make($data, [
+            'uid' => 'required',
+            'oid' => 'required',
+            'express_name' => 'required',
+            'express_no' => 'required',
+        ]);
+
+        if ($validator->fails())
+            self::json_return(20001);
+
+        $rs = OrderExpress::ExpressCount($data);
+        if($rs) self::json_return(20002);
+
+        DB::beginTransaction();
+        $res1 = OrderExpress::insertDo($data);
+        $res2 = Order::changeSendFlag($data['oid']);
+
+        if($res1 && $res2) {
+            DB::commit();
+            self::json_return(20000);
+        }
+        else {
+            DB::rollback();
+            self::json_return(20001);
+        }
     }
 }

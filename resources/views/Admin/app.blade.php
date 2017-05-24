@@ -31,9 +31,8 @@
                 <dt>系统设置</dt>
                 <dd><a href="{{URL::to('admin/siteConfig')}}" @if ($nav == '1-1') class="active" @endif >活动配置</a></dd>
                 <dd><a href="{{URL::to('admin/siteFriendlink')}}" @if ($nav == '1-2') class="active" @endif >友情链接</a></dd>
-                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-3') class="active" @endif >排行榜</a></dd>
-                <dd><a href="{{URL::to('admin/conf')}}" @if ($nav == '1-4') class="active" @endif >客服配置</a></dd>
-                <dd><a href="{{URL::to('admin/ExpressList')}}" @if ($nav == '1-5') class="active" @endif >快递配置</a></dd>
+                <dd><a href="{{URL::to('admin/CSR')}}" @if ($nav == '1-4') class="active" @endif >客服配置</a></dd>
+                <dd><a href="{{URL::to('admin/ExpressList')}}" @if ($nav == '1-5') class="active" @endif >快递公司配置</a></dd>
                 {{--<dd><a href="{{URL::to('Roll/config')}}" @if ($nav == '1-2') class="active" @endif >普通奖品池</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/dajiang')}}"  @if ($nav == '1-3') class="active" @endif >行列大奖</a></dd>--}}
                 {{--<dd><a href="{{URL::to('Roll/log')}}" @if ($nav == '1-4') class="active" @endif >日志列表</a></dd>--}}

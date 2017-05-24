@@ -54,6 +54,7 @@ class CreateOrder extends Migration
             $table->bigInteger('oid')->comment('订单id');
             $table->string('express_no',20)->comment('快递单号')->default('');
             $table->string('express_name',20)->comment('快递名称')->default('');
+            $table->boolean('status')->comment('0未作废，1作废')->default('0');
             $table->timestamps();
         });
 

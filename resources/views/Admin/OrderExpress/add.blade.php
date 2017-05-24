@@ -35,7 +35,7 @@
 
                         <li>
                             <span class="item_name" name="express_name" style="width:120px;">快递公司：</span>
-                            <select datatype="*" errormsg="请选择！">
+                            <select name="express_name" datatype="*" errormsg="请选择！">
                                 {!! $option_list !!}
                             </select>
                         </li>
@@ -79,7 +79,7 @@
                         $(".loading_area").fadeIn();
                     },
                     success: function (result) {
-                        if (result.errorno == 30000) {
+                        if (result.errorno == 20000) {
                             $(".loading_area").fadeOut(1500);
                             showAlert(result.msg, '{{URL::to('admin/orderExpress')}}', '{{URL::to('admin/orderExpress')}}');
                         }
