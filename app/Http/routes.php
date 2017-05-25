@@ -16,10 +16,13 @@
 
 Route::group(['middleware' => ['web']],function(){
     Route::get('userAttention/{status?}/{id?}','AppUserController@attention');
+    Route::get('/','AppIndexController@index');
+
 });
 
 /**
  * 后台路由
+ *
  */
 Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //后台登录相关路由
