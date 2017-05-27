@@ -45,15 +45,13 @@ class AdminArtWorkController extends Controller
         $nav   = '3-1';
 
         $artwork_class = ArtworkClass::get();
-        $artwork_class_list='';
-        foreach($artwork_class as $vo){
-            $artwork_class_list .="<input type='checkbox' name='artwork_class[{$vo->id}]' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
-        }
+        $new_array = $this->list_to_array($artwork_class);
+        $artwork_class_list = $this->list_to_html($new_array);
 
         $artist = Artist::get();
         $artist_list='';
         foreach($artist as $vo){
-            $artist_list .="<input type='checkbox' name='artist[{$vo->id}]' value='{$vo->id}'>{$vo->name}({$vo->nick})</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+            $artist_list .="<input type='checkbox' name='artist[]' value='{$vo->id}'>{$vo->name}({$vo->nick})</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
         }
 
         return view('Admin.Artwork.add',compact('title','nav','artist_list','artwork_class_list'));
@@ -61,6 +59,7 @@ class AdminArtWorkController extends Controller
 
     public function store(){
         $data = Request::all();
+
         unset($data['_token']);
 
         $data['start_price'] *= 100;
@@ -97,19 +96,16 @@ class AdminArtWorkController extends Controller
         foreach($artist_list as $vo){
             $flag = '';
             if(in_array($vo->id,$data['artist'])) $flag='checked';
-            $artist_list_html .="<input type='checkbox' $flag name='artist[{$vo->id}]' value='{$vo->id}'>{$vo->name}($vo->nick)</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+            $artist_list_html .="<input type='checkbox' $flag name='artist[]' value='{$vo->id}'>{$vo->name}($vo->nick)</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
         }
 
         //拍品分类
         $data['artwork_class']=explode(',',$data['artwork_class']);
         $artwork_list = ArtworkClass::get();
+        $new_array = $this->list_to_array($artwork_list);
 
-        $artwork_class_html='';
-        foreach($artwork_list as $vo){
-            $flag = '';
-            if(in_array($vo->id,$data['artwork_class'])) $flag='checked';
-            $artwork_class_html .="<input type='checkbox' $flag name='artwork_class[{$vo->id}]' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
-        }
+        $artwork_class_html = $this->list_to_html($new_array,$data['artwork_class']);
+
         return view('Admin.Artwork.edit',compact('title','data','nav','id','artist_list_html','artwork_class_html'));
     }
 
@@ -164,4 +160,47 @@ class AdminArtWorkController extends Controller
             self::json_return(50001);
         }
     }
+
+
+    /**
+     * 查询子分类
+     */
+    public function list_to_array($list, $pid = 0)
+    {
+        $new_array = array();
+        $middle_array = array();
+        foreach ($list as $vo) {
+            if ($vo['parent_id'] == $pid) {
+                $middle_array = $this->list_to_array($list, $vo['id']);
+                if (!empty($middle_array))
+                    $vo['son'] = $middle_array;
+                $new_array[] = $vo;
+            }
+        }
+        return $new_array;
+    }
+
+    /*
+     * 递归转换成html
+     */
+    public function list_to_html($list,$artwork_class=0)
+    {
+        $html = '';
+
+        foreach ($list as $key => $vo) {
+            if($vo->parent_id){
+                if($artwork_class!=0 && in_array($vo->id,$artwork_class)) $flag='checked';
+                else $flag='';
+
+                $html .= "<input type='checkbox' $flag name='artwork_class[]' value='$vo->id'>$vo->class_name</input> &nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+            else
+                $html .= "<div style='padding:15px 0px'>".$vo->class_name.' &nbsp:</div>';
+            if (is_array($vo->son)) {
+                $html .= $this->list_to_html($vo->son,$artwork_class);
+            }
+        }
+        return $html;
+    }
+
 }

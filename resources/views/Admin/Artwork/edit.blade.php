@@ -9,7 +9,7 @@
                     <ul class="ulColumn2">
                         <li>
                             <span class="item_name" style="width:120px;">拍品名称：</span>
-                            <input type="text" class="textbox textbox_295" name="name" value="{{$data->name}}"/>
+                            <input type="text" class="textbox textbox_295" name="name" value="{{$data->name}}" datatype="*" errormsg="拍品名称不能为空！"/>
                         </li>
 
                         <li id="upload_li">
@@ -26,7 +26,7 @@
 
                         <li>
                             <span class="item_name" style="width:120px;">视频地址：</span>
-                            <input type="text" class="textbox textbox_295" name="video" value="{{$data->video}}"/>
+                            <input type="text" class="textbox textbox_295" name="video" value="{{$data->video}}" datatype="url" errormsg="视频地址必须是网址！"/>
                         </li>
 
                         <li>
@@ -36,37 +36,37 @@
 
                         <li>
                             <span class="item_name" style="width:120px;">起拍价：</span>
-                            <input type="number" class="textbox" name="start_price" value="{{$data->start_price/100}}"/> 单位：元
+                            <input type="number" class="textbox" name="start_price" value="{{$data->start_price/100}}" datatype="n" errormsg="请填写！"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">加价幅度：</span>
-                            <input type="number" class="textbox" name="each_increase" value="{{$data->each_increase/100}}"/> 单位：元
+                            <input type="number" class="textbox" name="each_increase" value="{{$data->each_increase/100}}" datatype="n" errormsg="请填写！"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">延迟周期：</span>
-                            <input type="number" class="textbox" name="delay_seconds" value="{{$data->delay_seconds}}"/> 单位：分
+                            <input type="number" class="textbox" name="delay_seconds" value="{{$data->delay_seconds}}" datatype="n" errormsg="请填写！"/> 单位：分
                         </li><li>
                             <span class="item_name" style="width:120px;">保留价：</span>
-                            <input type="number" class="textbox" name="reserve_price" value="{{$data->reserve_price/100}}"/> 单位：元
+                            <input type="number" class="textbox" name="reserve_price" value="{{$data->reserve_price/100}}" datatype="n" errormsg="请填写！"/> 单位：元
                         </li>
                         <li>
                             <span class="item_name" style="width:120px;">保证金：</span>
-                            <input type="number" class="textbox" name="margin" value="{{$data->margin/100}}"/> 单位：元
+                            <input type="number" class="textbox" name="margin" value="{{$data->margin/100}}" datatype="n" errormsg="请填写！"/> 单位：元
                         </li>
 
                         <li class="time_handle">
                             <span class="item_name">开始时间：</span>
-                            <input type="text" class="textbox" id="start_time" name="start_time" value="{{$data->start_time}}" placeholder="请输入开始销售时间..." />
+                            <input type="text" class="textbox" id="start_time" name="start_time" value="{{$data->start_time}}" datatype="*" errormsg="请填写！" placeholder="请输入开始销售时间..." />
                         </li>
 
                         <li class="time_handle">
                             <span class="item_name">结束时间：</span>
-                            <input type="text" class="textbox" id="end_time" name="end_time" value="{{$data->end_time}}" placeholder="请输入结束销售时间..." />
+                            <input type="text" class="textbox" id="end_time" name="end_time" value="{{$data->end_time}}" datatype="*" errormsg="请填写！" placeholder="请输入结束销售时间..." />
                         </li>
 
-                        <li id="artwork_class_id">
-                            <span class="item_name" style="width:120px;">拍品分类：</span>
-                            {!!$artwork_class_html!!}
+                        <li style="overflow:hidden;">
+                            <span class="item_name" style="width:120px; display:block; float:left">拍品分类：</span>
+                            <div id="artwork_class_id"  style="float:left;margin-top:-15px;">{!!$artwork_class_html!!}</div>
                         </li>
 
                         <li id="artist_list_id">
@@ -77,7 +77,7 @@
                         <li>
                             <span class="item_name" style="width:120px;">是否上架展示：</span>
                             <label class="single_selection"><input type="radio" name="status" @if($data->status == 1) checked='true' @endif value='1'/>上架展示</label>
-                            <label class="single_selection"><input type="radio" name="status" @if($data->status == 0) checked='true' @endif value='0'/>不上架</label>
+                            <label class="single_selection"><input type="radio" name="status" @if($data->status == 0) checked='true' @endif value='0' datatype="*" errormsg="请选择！"/>不上架</label>
                         </li>
 
                         <li>
@@ -90,7 +90,7 @@
 
                         <li>
                             <span class="item_name" style="width:120px;"></span>
-                            <input type="button" class="link_btn" id="link_btn" value="提交"/>
+                            <input type="submit" class="link_btn" id="link_btn" value="提交"/>
                         </li>
                     </ul>
                 </form>
@@ -155,51 +155,24 @@
             });
         });
 
-        $("#link_btn").click(function() {
-            var name = $("input[name = 'name']").val();
-            var img = $("input[name = 'img']").val();
-            var img_thumb = $("input[name = 'img_thumb']").val();
-            var desc = $("textarea[name = 'desc']").val();
-            var start_price = $("input[name = 'start_price']").val();
-            var each_increase = $("input[name = 'each_increase']").val();
-            var delay_seconds = $("input[name = 'delay_seconds']").val();
-            var reserve_price = $("input[name = 'reserve_price']").val();
-            var margin = $("input[name = 'margin']").val();
-            var content = $("textarea[name = 'content']").val();
-
-            var start_time = $("input[name = 'start_time']").val();
-            var end_time = $("input[name = 'end_time']").val();
-
-            var artwork_class_flag=true;
-            $("#artwork_class_id > input").each(function() {
-                if($(this).is(':checked')) artwork_class_flag=false;
+        $(function() {
+            var demo = $("#data").Validform({
+                tiptype: 3,
+                ajaxPost: true,
+                beforeSubmit: function () {
+                    ajax_send();
+                    return false;
+                }
             });
 
-            var artist_list_flag=true;
-            $("#artist_list_id > input").each(function() {
-                if($(this).is(':checked')) artist_list_flag=false;
-            });
+            demo.addRule([
+                {
+                    ele:":checkbox",
+                    datatype:"*"
+                }]);
 
 
-            if (name == '' || img == '' || img_thumb == '' || desc == '' || typeof(content) == 'undefined') {
-                showAlert('请填完全', '', '');
-                return false;
-            }
-            if (isNaN(parseInt(start_price)) || isNaN(parseInt(each_increase)) ||
-                    isNaN(parseInt(delay_seconds)) || isNaN(parseInt(reserve_price)) || isNaN(parseInt(margin))) {
-                showAlert('部分字段需要填写数字', '', '');
-                return false;
-            }
-
-            if(artwork_class_flag || artist_list_flag){
-                showAlert('拍品分类和相关艺术家没有选择', '', '');
-                return false;
-            }
-
-            if (start_time == '')  showAlert('开始时间不能为空', '', '');
-            else if (end_time == '')  showAlert('结束时间不能为空', '', '');
-            else if (end_time < start_time)  showAlert('开始时间大于结束时间', '', '');
-            else{
+            function ajax_send() {
                 $.ajax({
                     url: "{{URL::to('admin/artwork')}}/{{$data->id}}",
                     type: "PUT",
@@ -221,6 +194,72 @@
                 })
             }
         })
+
+        {{--$("#link_btn").click(function() {--}}
+            {{--var name = $("input[name = 'name']").val();--}}
+            {{--var img = $("input[name = 'img']").val();--}}
+            {{--var img_thumb = $("input[name = 'img_thumb']").val();--}}
+            {{--var desc = $("textarea[name = 'desc']").val();--}}
+            {{--var start_price = $("input[name = 'start_price']").val();--}}
+            {{--var each_increase = $("input[name = 'each_increase']").val();--}}
+            {{--var delay_seconds = $("input[name = 'delay_seconds']").val();--}}
+            {{--var reserve_price = $("input[name = 'reserve_price']").val();--}}
+            {{--var margin = $("input[name = 'margin']").val();--}}
+            {{--var content = $("textarea[name = 'content']").val();--}}
+
+            {{--var start_time = $("input[name = 'start_time']").val();--}}
+            {{--var end_time = $("input[name = 'end_time']").val();--}}
+
+            {{--var artwork_class_flag=true;--}}
+            {{--$("#artwork_class_id > input").each(function() {--}}
+                {{--if($(this).is(':checked')) artwork_class_flag=false;--}}
+            {{--});--}}
+
+            {{--var artist_list_flag=true;--}}
+            {{--$("#artist_list_id > input").each(function() {--}}
+                {{--if($(this).is(':checked')) artist_list_flag=false;--}}
+            {{--});--}}
+
+            {{--if (name == '' || img == '' || img_thumb == '' || desc == '' || typeof(content) == 'undefined') {--}}
+                {{--showAlert('请填完全', '', '');--}}
+                {{--return false;--}}
+            {{--}--}}
+            {{--if (isNaN(parseInt(start_price)) || isNaN(parseInt(each_increase)) ||--}}
+                    {{--isNaN(parseInt(delay_seconds)) || isNaN(parseInt(reserve_price)) || isNaN(parseInt(margin))) {--}}
+                {{--showAlert('部分字段需要填写数字', '', '');--}}
+                {{--return false;--}}
+            {{--}--}}
+
+            {{--if(artwork_class_flag || artist_list_flag){--}}
+                {{--showAlert('拍品分类和相关艺术家没有选择', '', '');--}}
+                {{--return false;--}}
+            {{--}--}}
+
+            {{--if (start_time == '')  showAlert('开始时间不能为空', '', '');--}}
+            {{--else if (end_time == '')  showAlert('结束时间不能为空', '', '');--}}
+            {{--else if (end_time < start_time)  showAlert('开始时间大于结束时间', '', '');--}}
+            {{--else{--}}
+                {{--$.ajax({--}}
+                    {{--url: "{{URL::to('admin/artwork')}}/{{$data->id}}",--}}
+                    {{--type: "PUT",--}}
+                    {{--data: $("#data").serialize() + "&_token={{csrf_token()}}",--}}
+                    {{--dataType: "json",--}}
+                    {{--beforeSend: function () {--}}
+                        {{--$(".loading_area").fadeIn();--}}
+                    {{--},--}}
+                    {{--success: function (result) {--}}
+                        {{--if (result.errorno == 30000) {--}}
+                            {{--$(".loading_area").fadeOut(1500);--}}
+                            {{--showAlert(result.msg, '{{URL::to('admin/artwork')}}', '{{URL::to('admin/artwork')}}');--}}
+                        {{--}--}}
+                        {{--else {--}}
+                            {{--$(".loading_area").fadeOut(1500);--}}
+                            {{--showAlert(result.msg, '', '');--}}
+                        {{--}--}}
+                    {{--}--}}
+                {{--})--}}
+            {{--}--}}
+        {{--})--}}
     </script>
 
     </body>

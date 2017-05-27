@@ -6,25 +6,17 @@
             <hr />
             <section>
                 <div class="page_title">
-                    <a class="fr top_rt_btn" onClick="window.location.href='{{URL::to('admin/artworkclass/create')}}'">新增分类</a>
+                    <a class="fr top_rt_btn" onClick="window.location.href='{{URL::to('admin/artworkclass/create')}}'">新增一级分类</a>
                 </div>
                 <table class="table">
                     <tr>
                         <th>编号</th>
                         <th>分类名称</th>
+                        <th>状态</th>
                         <th>操作</th>
                     </tr>
 
-                    @foreach ($data as $key=>$rs)
-                        <tr>
-                            <td>{{ $rs->id }}</td>
-                            <td>{{ $rs->class_name }}</td>
-                            <td>
-                                <a href="{{URL::to('admin/artworkclass')}}/{{ $rs->id }}/edit">修改</a>
-                                <a href="javascript:;" onClick='isdelete({{ $rs->id }})'>删除</a>
-                            </td>
-                        </tr>
-                    @endforeach
+                    {!! $data !!}
                 </table>
 
             </section>

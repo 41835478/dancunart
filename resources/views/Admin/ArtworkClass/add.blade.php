@@ -7,9 +7,16 @@
             <section>
                 <form id="data">
                     <ul class="ulColumn2">
+                        <input type="hidden" name="parent_id" value="{{$pid}}" />
                         <li>
                             <span class="item_name" style="width:120px;">新类别名称：</span>
                             <input type="text" class="textbox textbox_295" name="class_name" />
+                        </li>
+
+                        <li>
+                            <span class="item_name" style="width:120px;">是否上架展示：</span>
+                            <label class="single_selection"><input type="radio" name="status"  checked='true' value='1'/>上架展示</label>
+                            <label class="single_selection"><input type="radio" name="status" value='0'/>不上架</label>
                         </li>
 
                         <li>

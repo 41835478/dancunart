@@ -4,52 +4,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>{{$title}}</title>
-    <!-- Add this to <head> -->
-    <link type="text/css" rel="stylesheet" href="{{asset('AppStatic/css')}}/bootstrap.min.css"/>
-    <link type="text/css" rel="stylesheet" href="{{asset('AppStatic/css')}}/bootstrap-vue.css"/>
-    <link type="text/css" rel="stylesheet" href="{{asset('AppStatic/css')}}/style.css"/>
-    <!-- Add this after vue.js -->
+
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="{{asset('AppStatic/css')}}/index.css">
+
+    <link type="text/css" rel="stylesheet" href="{{asset('AppStatic/css')}}/add.css"/>
+    {{--<!-- Add this after vue.js -->--}}
     <script src="{{asset('AppStatic/js')}}/vue.js"></script>
-    <script src="{{asset('AppStatic/js')}}/polyfill.min.js"></script>
-    <script src="{{asset('AppStatic/js')}}/tether.min.js"></script>
-    <script src="{{asset('AppStatic/js')}}/bootstrap-vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="{{asset('AppStatic/js')}}/index.js"></script>
+
 </head>
 <body>
 <div id="app">
+    <div class="padding5">
+    <el-dropdown v-if="islogin" v-cloak>
+      <span class="el-dropdown-link">
+        您好：admin<i class="el-icon-caret-bottom el-icon--right"></i>
+      </span>
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item >个人中心</el-dropdown-item>
+            <el-dropdown-item >登出</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
 
-    <b-navbar toggleable >
+    <el-button v-else icon="setting" v-cloak>登录/注册</el-button>
 
-        <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+    <el-button  icon="information" style="float:right" v-cloak>帮助中心</el-button>
+    </div>
+    <hr />
 
-        <b-link class="navbar-brand" to="#">
-            <span>淡村书画院</span>
-        </b-link>
+    <div class="search">
+        <div class="logo"><img src="{{asset('AppStatic/images')}}/logo.png"/></div>
+        <div class="search_input">
+            <el-input placeholder="请输入内容" v-model="search">
+                <el-select v-model="select" slot="prepend" placeholder="请选择">
+                    <el-option label="艺术家" value="1"></el-option>
+                    <el-option label="艺术品" value="2"></el-option>
+                </el-select>
+                <el-button slot="append" icon="search"></el-button>
+            </el-input>
+        </div>
+    </div>
+    <hr />
 
-        <b-collapse is-nav id="nav_collapse">
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" v-cloak>
 
-            <b-nav is-nav-bar>
-                <b-nav-item :class="{active : nav==1 }" >艺术家</b-nav-item>
-                <b-nav-item :class="{active : nav==2 }" >艺术品</b-nav-item>
-                <b-nav-item :class="{active : nav==3 }" >关于淡村书画院</b-nav-item>
-            </b-nav>
+    <el-submenu index="1">
+        <template slot="title">拍品分类</template>
 
-            <b-nav is-nav-bar class="ml-auto">
+        <el-menu-item-group  class="leftnavul">
+            <div class="leftnavtitle"><a href="#">分组1</a></div>
+            <div class="leftnavitem"><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a></div>
+        </el-menu-item-group>
 
-                <b-nav-item-dropdown right v-if="login_status">
-                    <template slot="text">
-                        <span style="font-weight: bold;">admin</span>
-                    </template>
-                    <b-dropdown-item to="#">我的</b-dropdown-item>
-                    <b-dropdown-item to="#">登出</b-dropdown-item>
-                </b-nav-item-dropdown>
+        <el-menu-item-group class="leftnavul">
+            <div class="leftnavtitle"><a href="#">分组2</a></div>
+            <div class="leftnavitem"><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a></div>
+        </el-menu-item-group>
 
-                <template secondary v-if="!login_status">
-                        <b-button  href="">登录</b-button>
-                </template>
+    </el-submenu>
 
-            </b-nav>
-        </b-collapse>
-    </b-navbar>
+    <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">在线拍卖</a></el-menu-item>
+    <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">艺术品</a></el-menu-item>
+
+
+    </el-menu>
+
+
+
 @yield('content')
 </div>
 </body>

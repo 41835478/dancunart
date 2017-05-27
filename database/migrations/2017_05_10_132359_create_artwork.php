@@ -38,6 +38,8 @@ class CreateArtwork extends Migration
         Schema::create('art_artwork_class', function (Blueprint $table) {
             $table->increments('id')->comment('自增id');
             $table->string('class_name',80)->comment('艺术品分类名称');
+            $table->integer('parent_id')->comment('艺术品分类父级')->default(0);
+            $table->boolean('status')->comment('1上架展示，0下架')->default(1);
         });
     }
 

@@ -1,32 +1,43 @@
 @extends('App.common')
 @section('content')
+    <template>
+        <el-carousel :interval="5000" arrow="always">
+            <el-carousel-item>
+                <img src="{{asset('AppStatic/images')}}/banner.jpg"/>
+            </el-carousel-item>
+            <el-carousel-item>
+                <img src="{{asset('AppStatic/images')}}/banner.jpg"/>
+            </el-carousel-item>
+            <el-carousel-item>
+                <img src="{{asset('AppStatic/images')}}/banner.jpg"/>
+            </el-carousel-item>
+        </el-carousel>
+    </template>
 
-    <b-carousel controls indicators :interval="3000"  height="300px" class="lc_banner">
-
-        <!-- Text slides -->
-        <b-carousel-slide height="300px" background="gray" img="{{asset('AppStatic/images')}}/banner.jpg">
-        </b-carousel-slide>
-
-        <!-- Slides with custom text -->
-        <b-carousel-slide height="300px" background="red" img="{{asset('AppStatic/images')}}/banner.jpg">
-            Hello world
-        </b-carousel-slide>
-
-        <!-- Slides with image -->
-        <b-carousel-slide height="300px" background="green" img="{{asset('AppStatic/images')}}/banner.jpg">
-        </b-carousel-slide>
-
-    </b-carousel>
+    <template>
+        <div class="block" style="width:400px;">
+            <el-carousel trigger="click" height="150px;">
+                <el-carousel-item v-for="item in 4" :key="item">
+                    <h3>@{{ item }}</h3>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+    </template>
+    </template>
 
 @endsection
 @section('footer')
     <script>
-        window.app = new Vue({
+        var app = new Vue({
             el: '#app',
-            data:{
-                nav: 1,
-                login_status:1,
-            },
+            data: function() {
+                return {
+                    activeIndex: '1',
+                    islogin:0,
+                    select: '',
+                    search:''
+                }
+            }
         })
     </script>
 @endsection
