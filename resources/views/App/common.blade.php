@@ -3,21 +3,32 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>{{$title}}</title>
+    <title>{{$site->title}}</title>
+    <meta name="keywords" content="{{$site->keywords}}"/>
+    <meta name="description" content="{{$site->description}}"/>
 
-    <!-- 引入样式 -->
     <link rel="stylesheet" href="{{asset('AppStatic/css')}}/index.css">
-
     <link type="text/css" rel="stylesheet" href="{{asset('AppStatic/css')}}/add.css"/>
-    {{--<!-- Add this after vue.js -->--}}
+
+
     <script src="{{asset('AppStatic/js')}}/vue.js"></script>
-    <!-- 引入组件库 -->
     <script src="{{asset('AppStatic/js')}}/index.js"></script>
 
+    <!--video-->
+    <link href="{{asset('AppStatic/css')}}/video-js.min.css" rel="stylesheet">
+    <script src="{{asset('AppStatic/js')}}/video.min.js"></script>
+
+    <!--[if lt IE 9]>
+    <div class="topframe">你的浏览器 <strong>太旧了</strong> ,请升级获得更好的体验
+        <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a>
+    </div>
+    <![endif]-->
 </head>
 <body>
 <div id="app">
-    <div class="padding5">
+
+
+    <div class="padding4">
     <el-dropdown v-if="islogin" v-cloak>
       <span class="el-dropdown-link">
         您好：admin<i class="el-icon-caret-bottom el-icon--right"></i>
@@ -53,15 +64,18 @@
     <el-submenu index="1">
         <template slot="title">拍品分类</template>
 
+        @foreach ($artwork_nav as $key=>$rs)
         <el-menu-item-group  class="leftnavul">
-            <div class="leftnavtitle"><a href="#">分组1</a></div>
-            <div class="leftnavitem"><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a><a href="#">导航一</a></div>
+            <div class="leftnavtitle"><a href="#">{{$rs->class_name}}</a></div>
+            @if(isset($rs->son))
+            <div class="leftnavitem">
+                @foreach ($rs->son as $key2=>$rs2)
+                <a href="#">{{$rs2->class_name}}</a>
+                @endforeach
+            </div>
+            @endif
         </el-menu-item-group>
-
-        <el-menu-item-group class="leftnavul">
-            <div class="leftnavtitle"><a href="#">分组2</a></div>
-            <div class="leftnavitem"><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a><a href="#">导航二</a></div>
-        </el-menu-item-group>
+        @endforeach
 
     </el-submenu>
 
@@ -71,9 +85,29 @@
 
     </el-menu>
 
-
-
 @yield('content')
+    <div class="lc_footer">
+    <el-row :gutter="10"  class="lc_footer_nav">
+
+        @foreach ($footer_nav as $key=>$rs)
+            <el-col :xs="24" :sm="4" :md="4" :lg="4">
+                {{$rs->page_name}}
+                @if(isset($rs->son))
+                    <ul>
+                        @foreach ($rs->son as $key2=>$rs2)
+                        <li><a href="#">{{$rs2->page_name}}</a></li>
+                        @endforeach
+                    </ul>
+                @endif
+            </el-col>
+        @endforeach
+
+    </el-row>
+
+        <div class="lc_footer_copyright">
+            {!! $site->copyright !!}
+        </div>
+    </div>
 </div>
 </body>
 @yield('footer')

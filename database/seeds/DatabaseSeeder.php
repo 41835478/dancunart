@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SiteConfigSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(OrderSeeder::class);
+        $this->call(SinglePage::class);
     }
 }

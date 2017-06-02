@@ -73,7 +73,7 @@ class AdminArtWorkController extends Controller
 
             $data['artwork_class']=implode(',',$data['artwork_class']);
             $data['artist']=implode(',',$data['artist']);
-            $res2 = Artwork::insert($data);
+            $res2 = Artwork::insertDo($data);
 
         if($res1 && $res2){
             DB::commit();
@@ -119,13 +119,13 @@ class AdminArtWorkController extends Controller
         $data['margin'] *= 100;
 
         $data['artist'] = array_values($data['artist']);
-        $artist = Artwork::where('id',$id)->pluck('artist')->toarray();
+        $artist = Artwork::where('id',$id)->pluck('artist')->first();
 
         DB::beginTransaction();
             //艺术家有变动
-            if(explode(',',$artist[0]) != $data['artist']){
+            if(explode(',',$artist) != $data['artist']){
                 //老艺术家们减数据
-                $res1 = Artist::whereIn('id',explode(',',$artist[0]))->decrement('artwork_count');
+                $res1 = Artist::whereIn('id',explode(',',$artist))->decrement('artwork_count');
                 //新艺术家们加数据
                 $res2 = Artist::whereIn('id',$data['artist'])->increment('artwork_count');
             }
@@ -133,7 +133,7 @@ class AdminArtWorkController extends Controller
 
             $data['artist']=implode(',',$data['artist']);
             $data['artwork_class']=implode(',',$data['artwork_class']);
-            $res3 = Artwork::where('id',$id)->update($data);
+            $res3 = Artwork::updateDo($id,$data);
 
         if($res1 && $res2 && $res3){
             DB::commit();
@@ -146,10 +146,10 @@ class AdminArtWorkController extends Controller
     }
 
     public function destroy($id){
-        $artist = Artwork::where('id',$id)->pluck('artist')->toarray();
+        $artist = Artwork::where('id',$id)->pluck('artist')->first();
         DB::beginTransaction();
             //老艺术家们减数据
-            $res1 = Artist::whereIn('id',explode(',',$artist[0]))->decrement('artwork_count');
+            $res1 = Artist::whereIn('id',explode(',',$artist))->decrement('artwork_count');
             $res2 = Artwork::where('id',$id)->delete();
         if($res1 && $res2) {
             DB::commit();

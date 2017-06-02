@@ -8,7 +8,7 @@ use App\Http\Model\SiteConfigModel as SiteConfig;
 class AdminSiteConfigController extends Controller
 {
     public function index(){
-        $title = "网站配置";
+        $title = "基础配置";
         $nav   = '1-1';
         $data = SiteConfig::first();
 
@@ -20,7 +20,7 @@ class AdminSiteConfigController extends Controller
         unset($data['_token']);
 
         $validator = Validator::make($data, [
-            'role' => 'required'
+            'copyright' => 'required'
         ]);
 
         if ($validator->fails())

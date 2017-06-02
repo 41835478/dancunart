@@ -21,9 +21,9 @@ class ArtWorkSeeder extends Seeder
 
         DB::table('art_artwork')->insert([
             'name'=>'象山晚春',
-            'img_thumb'=>'',
-            'img'=>'',
-            'video'=>'',
+            'img_thumb'=>'uploads/2017/06_02/thumb-17-07-06-59312aba27bf9.jpg',
+            'img'=>'uploads/2017/06_02/17-07-06-59312aba27bf9.jpg',
+            'video'=>'//vjs.zencdn.net/v/oceans.mp4',
             'artist'=>'1',
             'desc'=>'桂林山水甲天下',
             'content'=>'<p>桂林<br /><b>柳州</b></p>',
@@ -36,7 +36,30 @@ class ArtWorkSeeder extends Seeder
             'now_price'=>0,
             'start_time'=>date('Y-m-d H:i:s'),
             'end_time'=>date('Y-m-d H:i:s'),
-            'artwork_class'=>'3,4'
+            'artwork_class'=>'3,4',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+        DB::table('art_artwork')->insert([
+            'name'=>'虾',
+            'img_thumb'=>'uploads/2017/06_02/thumb-17-25-01-59312eedf1c86.jpg',
+            'img'=>'uploads/2017/06_02/17-25-01-59312eedf1c86.jpg',
+            'video'=>'//vo.fod4.com/v/25c17d6eb2/v600.mp4',
+            'artist'=>'1',
+            'desc'=>'齐白石 虾',
+            'content'=>'<p>桂林<br /><b>柳州</b></p>',
+            'start_price'=>'100000',
+            'each_increase'=>'10000',
+            'delay_seconds'=>5,
+            'reserve_price'=>'20000',
+            'margin'=>'15000',
+            'buy_num'=>0,
+            'now_price'=>0,
+            'start_time'=>date('Y-m-d H:i:s'),
+            'end_time'=>date('Y-m-d H:i:s'),
+            'artwork_class'=>'3,4',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
         ]);
     }
 }

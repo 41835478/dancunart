@@ -1,7 +1,8 @@
 ### dancun art 项目开发明细表
 ---
-
--
+- 6-2  首页模型完毕，后端新增配置字段，80%
+- 6-1  前端集成vediojs 100%
+- 5-31 前端集成vediojs 50%
 - 5-27 前端开发，nav下拉样式，根据前端整理后端，修改产品分类。
 - 5-26 放弃 bootstrapvue 用新的架子 element。捏首页
 - 5-25 开始制作前端，目前用的架子是bootstrap4 vue2 carousel 有bug

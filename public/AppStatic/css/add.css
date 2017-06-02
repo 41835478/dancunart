@@ -3,7 +3,9 @@ body{
     background:#eef1f6;
 }
 #app{ max-width:1200px;
-    margin:10px auto; }
+    margin:10px auto 0px auto;
+    overflow:hidden;
+}
 .padding5{
     padding:5px 10px;
 }
@@ -61,3 +63,59 @@ body{
     display: block;
     float:left;
 }
+.topframe{margin: 0;
+    text-align: center;
+    border-radius: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #ebccd1;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    padding: 10px 25px;
+}
+
+.lc_content{
+    width:100%;
+}
+.lc_content img{ max-width:100%; height:150px;}
+
+.lc_content p{ height:30px; line-height: 30px;border-top: 4px solid #000;border-bottom: 1px dashed #000;}
+
+.lc_video{
+    position: fixed;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+.lc_video_center{
+    position:absolute; left:0px; top:0px;}
+.lc_video_close{
+    position: absolute;  right: 0px;  top: -42px;
+}
+.lc_news_ul{ padding-right:10px;}
+.lc_news_ul li a{ text-decoration: none; color: #0d0d0d; display: block;float:left}
+.lc_news_ul li span{ color:#ccc; display: block; float:right;}
+
+.lc_result_ul{ padding:5px 10px;}
+.lc_result_ul li{ list-style-type: none; display: block; overflow: hidden;}
+.lc_result_ul li a{ text-decoration: none; color: #0d0d0d; display: block;float:left}
+.lc_result_ul li span{ color:red; display: block; float:right;}
+
+.lc_footer{ background:#000;padding:10px 0px; }
+.lc_footer div{ color:#fff;}
+.lc_footer_nav{border-bottom:1px solid #454545;padding:10px 0px;}
+.lc_footer_nav ul{ padding:0px; margin:10px 0px 0px 0px;}
+.lc_footer_nav ul li{ list-style-type: none;}
+.lc_footer_nav ul li a{ text-decoration: none; color: #acacac; font-size:12px;}
+
+.lc_friendlink{  overflow: hidden;}
+.lc_friendlink a{ display: block; float:left; border:0px;}
+.lc_friendlink a img{ max-width:100px;}
+.lc_footer_copyright{ text-align: center; font-size:12px; color:#c6c6c6; line-height:20px;padding:10px 0px;}

@@ -7,11 +7,23 @@
             <section>
                 <form id="data">
                     <ul class="ulColumn2">
+                        <li>
+                            <span class="item_name" style="width:120px;">网站名称：</span>
+                            <input type="text" class="textbox textbox_295" value='{{$data->title}}' name="title" datatype="*"/>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">网站关键词：</span>
+                            <input type="text" class="textbox textbox_295" value='{{$data->keywords}}' name="keywords" datatype="*"/>
+                        </li>
+                        <li>
+                            <span class="item_name" style="width:120px;">网站描述：</span>
+                            <input type="text" class="textbox textbox_295" value='{{$data->description}}' name="description" datatype="*"/>
+                        </li>
 
                         <li>
-                            <span class="item_name" style="width:120px;">兑换规则：</span>
-                            <textarea placeholder="网站兑换规则" class="textarea" style="width:400px;height:80px;"
-                                      name="role" datatype="*" nullmsg="请填写规则！" errormsg="请填写规则！">{{$data->role}}</textarea>
+                            <span class="item_name" style="width:120px;">网站底部版权：</span>
+                            <textarea placeholder="网站底部版权" class="textarea" style="width:400px;height:80px;"
+                                      name="copyright" datatype="*" errormsg="请填写！">{{$data->copyright}}</textarea>
                         </li>
 
                         <li>

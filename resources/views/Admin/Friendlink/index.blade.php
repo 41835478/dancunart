@@ -28,7 +28,7 @@
                             <td><img style="max-width:100px" src="{{asset('/')}}{{ $rs->link_img }}"/></td>
                             <td>{{ $rs->link_url }}</td>
                             <td>{{ $rs->rank }}</td>
-                            <td>@if($rs->status) 冻结 @else 正常 @endif</td>
+                            <td>@if($rs->status) 展示 @else 不展示 @endif</td>
                             <td>{{ $rs->created_at }}</td>
                             <td>{{ $rs->updated_at }}</td>
                             <td>

@@ -20,7 +20,7 @@ class ArtistSeeder extends Seeder
             'name'=>'齐白石',
             'nick'=>'齐齐',
             'desc'=>'描述',
-            'artwork_count'=>1,
+            'artwork_count'=>2,
             'blog'=>'带html<p>asdfsdf</p><a href="#">fff</a>',
             'art_class'=>'1,3'
         ]);

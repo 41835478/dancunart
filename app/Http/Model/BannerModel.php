@@ -4,23 +4,23 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArtworkModel extends Model
+class BannerModel extends Model
 {
-    protected $table = 'art_artwork';
+    protected $table ='site_banner';
 
     public static function insertDo($data){
-        $artwork = new self;
+        $banner = new self;
         foreach($data as $key=>$vo){
-            $artwork->$key = $vo;
+            $banner->$key = $vo;
         }
-        return $artwork->save();
+        return $banner->save();
     }
 
     public static function updateDo($id,$data){
-        $artwork = self::find($id);
+        $banner = self::find($id);
         foreach($data as $key=>$vo){
-            $artwork->$key = $vo;
+            $banner->$key = $vo;
         }
-        return $artwork->save();
+        return $banner->save();
     }
 }

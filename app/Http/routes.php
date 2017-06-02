@@ -36,8 +36,11 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //网站配置
     Route::resource('siteConfig','AdminSiteConfigController');
     Route::resource('siteFriendlink','AdminSiteFriendlinkController');
+    Route::resource('singlePage','AdminSinglePageController');
     Route::resource('ExpressList','AdminExpressListController');
     Route::resource('CSR','AdminCSRController');
+    Route::resource('banner','AdminBannerController');
+
 
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
