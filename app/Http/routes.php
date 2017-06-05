@@ -30,6 +30,14 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::post('login','AdminLoginController@loginCheck');
     Route::get('loginOut','AdminLoginController@loginOut');
 
+    //后台主页路由
+    Route::resource('/','AdminController');
+});
+
+Route::group(['middleware' => ['web','checklogin'],'prefix' => 'admin'], function () {
+    //清除缓存
+    Route::get('cleanRedis','AdminLoginController@cleanRedis');
+
     //上传图片路由
     Route::post('upload','AdminUploadController@upload');
 
@@ -45,6 +53,10 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     //后台修改用户信息路由
     Route::resource('auth','AdminAuthController');
 
+    //后台新闻路由
+    Route::resource('article','AdminArticleController');
+    Route::resource('articleClass','AdminArticleClassController');
+
     //后台艺术家路由
     Route::resource('artist','AdminArtistController');
     Route::resource('artistclass','AdminArtistClassController');
@@ -58,6 +70,7 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::post('withdraw/{id?}','AdminOrderController@withdrawhandle');
     Route::post('order/{id?}','AdminOrderController@orderhandle');
 
+    //快递发货单路由
     Route::get('orderExpress/invalid/{id?}','AdminOrderController@invalid');
     Route::resource('orderExpress','AdminOrderController');
 
@@ -66,6 +79,4 @@ Route::group(['middleware' => ['web'],'prefix' => 'admin'], function () {
     Route::get('user/accountset/{id?}/{nav?}','AdminUserController@accountset');
     Route::resource('user','AdminUserController');
 
-    //后台主页路由
-    Route::resource('/','AdminController');
 });

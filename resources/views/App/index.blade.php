@@ -32,9 +32,9 @@
             <el-col :xs="24" :sm="8" :md="8" :lg="8">
                 <p>新闻 /</p>
                     <ul class="lc_news_ul">
-                        <li><a href="#">asdfasdfasdf</a><span>2017-06-01</span></li>
-                        <li><a href="#">asdfasdfasdf</a><span>2017-06-01</span></li>
-                        <li><a href="#">asdfasdfasdf</a><span>2017-06-01</span></li>
+                        @foreach($article as $key=>$vo)
+                        <li><a href="#">{{str_limit($vo->title,20)}}</a><span>{{$vo->updated_at}}</span></li>
+                        @endforeach
                     </ul>
             </el-col>
 

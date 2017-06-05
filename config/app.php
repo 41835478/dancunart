@@ -49,6 +49,8 @@ return [
     'title_en' => env('TITLE_EN',''),
     'copyright' => env('COPY_RIGHT',''),
     'versionCMS' => env('VERSION_CMS',''),
+    //redis 缓存列表
+    'redis_array_cache' => array('site','banner','artwork_nav','article','friend_link','art_work_list','footer_nav'),
 
     /*
     |--------------------------------------------------------------------------
@@ -233,5 +235,10 @@ return [
         //delete status
         '50000' => '删除成功',
         '50001' => '删除失败',
+
+        //redis status
+        '60000' => '清除成功',
+        '60001' => '清除失败',
+        '60002' => '没有缓存，不用清理',
     ]
 ];

@@ -16,8 +16,8 @@
 <header>
     <h1><img src="{{asset('static/images/admin_logo.png')}}"/></h1>
     <ul class="rt_nav">
+        <li><a href="javascript:;" onClick="cleanRedis()" class="errorTips">清除缓存</a></li>
         <li><a href="{{URL::to('admin')}}" class="website_icon">系统首页</a></li>
-        {{--<li><a href="#" class="admin_icon">DeathGhost</a></li>--}}
         <li><a href="{{URL::to('admin/auth')}}" class="set_icon">用户设置</a></li>
         <li><a href="{{URL::to('admin/loginOut')}}" class="quit_icon">安全退出</a></li>
     </ul>
@@ -83,6 +83,14 @@
             </dl>
         </li>
 
+        <li>
+            <dl>
+                <dt>文章管理</dt>
+                <dd><a href="{{URL::to('admin/article')}}" @if ($nav == '8-1') class="active" @endif >文章列表</a></dd>
+                <dd><a href="{{URL::to('admin/articleClass')}}" @if ($nav == '8-2') class="active" @endif >文章分类</a></dd>
+            </dl>
+        </li>
+
 
     </ul>
 
@@ -125,5 +133,21 @@
 <script src="{{asset('static/timepicker/js/jquery-ui-slide.min.js')}}"></script>
 <script src="{{asset('static/timepicker/js/jquery-ui-timepicker-addon.js')}}"></script>
 <script src="{{asset('static/js/validform.5.3.2.min.js')}}"></script>
-
+<script>
+    function cleanRedis(){
+        $.ajax({
+            url: "{{URL::to('admin/cleanRedis')}}",
+            type: "get",
+            data: "_token={{csrf_token()}}",
+            dataType: "json",
+            beforeSend: function () {
+                $(".loading_area").fadeIn();
+            },
+            success: function (result) {
+                $(".loading_area").fadeOut(1500);
+                showAlert(result.msg, '', '');
+            }
+        })
+    }
+</script>
 @yield('footer')

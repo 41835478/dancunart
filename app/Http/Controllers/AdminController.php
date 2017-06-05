@@ -22,7 +22,4 @@ class AdminController extends Controller
         $data = Admin::where('name',Session::get('admin'))->first();
 		return view('Admin.index',compact('title','nav','data'));
     }
-
-    public function show(){
-    }
 }

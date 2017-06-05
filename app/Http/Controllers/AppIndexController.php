@@ -6,15 +6,17 @@ use Request,Redis;
 use App\Http\Model\SiteConfigModel as Site;
 use App\Http\Model\BannerModel as Banner;
 use App\Http\Model\ArtworkClassModel as ArtWorkClass;
+use App\Http\Model\ArticleModel as Article;
 use App\Http\Model\SinglePageModel as SinglePage;
 use App\Http\Model\SiteFriendlinkModel as FriendLink;
 use App\Http\Model\ArtworkModel as ArtWork;
 class AppIndexController extends Controller
 {
+
     public function index(){
         echo 'start:'.microtime(true).'<br />';
         //缓存site
-        if(Redis::exists('site')){
+        if(Redis::exists('site') && in_array('site',config('app.redis_array_cache'))){
             $site = json_decode(Redis::get('site'));
         }
         else {
@@ -23,7 +25,7 @@ class AppIndexController extends Controller
         }
 
         //缓存banner
-        if(Redis::exists('banner')){
+        if(Redis::exists('banner') && in_array('banner',config('app.redis_array_cache')) ){
             $banner = json_decode(Redis::get('banner'));
         }
         else {
@@ -32,7 +34,7 @@ class AppIndexController extends Controller
         }
 
         //缓存artwork_nav
-        if(Redis::exists('artwork_nav')){
+        if(Redis::exists('artwork_nav') && in_array('artwork_nav',config('app.redis_array_cache'))){
             $artwork_nav = json_decode(Redis::get('artwork_nav'));
         }
         else {
@@ -42,8 +44,17 @@ class AppIndexController extends Controller
             Redis::set('artwork_nav',json_encode($artwork_nav));
         }
 
+        //缓存article
+        if(Redis::exists('article') && in_array('article',config('app.redis_array_cache'))){
+            $article = json_decode(Redis::get('article'));
+        }
+        else {
+            $article = Article::where('status',1)->get();
+            Redis::set('article',$article);
+        }
+
         //缓存friend_link
-        if(Redis::exists('friend_link')){
+        if(Redis::exists('friend_link') && in_array('friend_link',config('app.redis_array_cache'))){
             $friend_link = json_decode(Redis::get('friend_link'));
         }
         else {
@@ -52,7 +63,7 @@ class AppIndexController extends Controller
         }
 
         //缓存art_work_list
-        if(Redis::exists('art_work_list')){
+        if(Redis::exists('art_work_list') && in_array('art_work_list',config('app.redis_array_cache'))){
             $art_work_list = json_decode(Redis::get('art_work_list'));
         }
         else {
@@ -61,7 +72,7 @@ class AppIndexController extends Controller
         }
 
         //缓存footer_nav
-        if(Redis::exists('footer_nav')){
+        if(Redis::exists('footer_nav') && in_array('footer_nav',config('app.redis_array_cache'))){
             $footer_nav = json_decode(Redis::get('footer_nav'));
         }
         else {
@@ -72,7 +83,7 @@ class AppIndexController extends Controller
 
         echo 'end  :'.microtime(true).'<br />';
 
-        return view('App.index',compact('site','banner','artwork_nav','art_work_list','friend_link','footer_nav'));
+        return view('App.index',compact('site','banner','artwork_nav','article','art_work_list','friend_link','footer_nav'));
     }
 
     /**

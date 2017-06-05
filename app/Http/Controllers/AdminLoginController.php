@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request,Session,Validator,Crypt;
+use Request,Session,Validator,Crypt,Redis;
 use App\Http\Model\AdminModel as Admin;
 
 class AdminLoginController extends Controller
@@ -59,4 +59,12 @@ class AdminLoginController extends Controller
 		header('Location:'.$url);
 		exit;
 	}
+
+	public function cleanRedis(){
+       $res = Redis::del(config('app.redis_array_cache'));
+
+           if($res > 0) self::json_return('60000');
+           else if($res == 0) self::json_return('60002');
+           else self::json_return('60001');
+    }
 }
