@@ -14,6 +14,8 @@
     <script src="{{asset('AppStatic/js')}}/vue.js"></script>
     <script src="{{asset('AppStatic/js')}}/index.js"></script>
 
+    <script src="{{asset('AppStatic/js')}}/axios.min.js"></script>
+
     <!--video-->
     <link href="{{asset('AppStatic/css')}}/video-js.min.css" rel="stylesheet">
     <script src="{{asset('AppStatic/js')}}/video.min.js"></script>
@@ -39,9 +41,9 @@
         </el-dropdown-menu>
     </el-dropdown>
 
-    <el-button v-else icon="setting" v-cloak>登录/注册</el-button>
+    <el-button v-else icon="setting" onclick="jump('Passport')" v-cloak>登录/注册</el-button>
 
-    <el-button  icon="information" style="float:right" v-cloak>帮助中心</el-button>
+    <el-button  icon="information" style="float:right" onclick="jump('Helper')" v-cloak>帮助中心</el-button>
     </div>
     <hr />
 
@@ -111,4 +113,9 @@
 </div>
 </body>
 @yield('footer')
+<script>
+    function jump(url){
+        window.location.href="{{asset('/')}}"+url;
+    }
+</script>
 </html>

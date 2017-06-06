@@ -1,39 +1,66 @@
-body{
-    margin:0px;
-    background:#eef1f6;
+body {
+    margin: 0px;
+    background: #eef1f6;
 }
-#app{ max-width:1200px;
-    margin:10px auto 0px auto;
-    overflow:hidden;
-}
-.padding5{
-    padding:5px 10px;
-}
-[v-cloak] {  display: none;  }
 
-.el-carousel__item>img{
-    margin:0px auto;
+#app {
+    max-width: 1200px;
+    margin: 10px auto 0px auto;
+    overflow: hidden;
+}
+
+#app_SPA .el-carousel__container {
+    height: 600px;
+}
+
+#app_SPA .el-tabs__nav {
+    margin-left: 36px;
+}
+
+.padding5 {
+    padding: 5px 10px;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+.el-carousel__item > img {
+    margin: 0px auto;
     display: block;
 }
+
 .el-select .el-input {
     width: 110px;
 }
-.search{
+
+.search {
     margin: 15px 0px;
     display: block;
     overflow: hidden;
 }
-.logo{ float:left;}
-.search_input{
-    line-height:115px;
-    float:right;
-    max-width:500px;
-    margin:0px auto;
+
+.logo {
+    float: left;
 }
 
-.leftnavul{width:320px; overflow: hidden}
-.leftnavtitle{padding-left: 10px;}
-.leftnavtitle > a{
+.search_input {
+    line-height: 115px;
+    float: right;
+    max-width: 500px;
+    margin: 0px auto;
+}
+
+.leftnavul {
+    width: 320px;
+    overflow: hidden
+}
+
+.leftnavtitle {
+    padding-left: 10px;
+}
+
+.leftnavtitle > a {
     height: 40px;
     line-height: 40px;
     font-size: 16px;
@@ -41,14 +68,18 @@ body{
     padding: 0 10px;
     cursor: pointer;
     position: relative;
-    transition: border-color .3s,background-color .3s,color .3s;
+    transition: border-color .3s, background-color .3s, color .3s;
     box-sizing: border-box;
     white-space: nowrap;
     text-decoration: none;
 
 }
-.leftnavitem{padding-left: 30px;}
-.leftnavitem > a{
+
+.leftnavitem {
+    padding-left: 30px;
+}
+
+.leftnavitem > a {
     height: 40px;
     line-height: 40px;
     font-size: 14px;
@@ -56,14 +87,16 @@ body{
     padding: 0 10px;
     cursor: pointer;
     position: relative;
-    transition: border-color .3s,background-color .3s,color .3s;
+    transition: border-color .3s, background-color .3s, color .3s;
     box-sizing: border-box;
     white-space: nowrap;
     text-decoration: none;
     display: block;
-    float:left;
+    float: left;
 }
-.topframe{margin: 0;
+
+.topframe {
+    margin: 0;
     text-align: center;
     border-radius: 0;
     position: fixed;
@@ -78,44 +111,170 @@ body{
     padding: 10px 25px;
 }
 
-.lc_content{
-    width:100%;
+.lc_content {
+    width: 100%;
 }
-.lc_content img{ max-width:100%; height:150px;}
 
-.lc_content p{ height:30px; line-height: 30px;border-top: 4px solid #000;border-bottom: 1px dashed #000;}
+.lc_content img {
+    max-width: 100%;
+    height: 150px;
+}
 
-.lc_video{
+.lc_content p {
+    height: 30px;
+    line-height: 30px;
+    border-top: 4px solid #000;
+    border-bottom: 1px dashed #000;
+}
+
+.lc_video {
     position: fixed;
     left: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     top: 0;
     width: 100%;
     height: 100%;
     z-index: 10;
 }
-.lc_video_center{
-    position:absolute; left:0px; top:0px;}
-.lc_video_close{
-    position: absolute;  right: 0px;  top: -42px;
+
+.lc_video_center {
+    position: absolute;
+    left: 0px;
+    top: 0px;
 }
-.lc_news_ul{ padding-right:10px;}
-.lc_news_ul li a{ text-decoration: none; color: #0d0d0d; display: block;float:left}
-.lc_news_ul li span{ color:#ccc; display: block; float:right;}
 
-.lc_result_ul{ padding:5px 10px;}
-.lc_result_ul li{ list-style-type: none; display: block; overflow: hidden;}
-.lc_result_ul li a{ text-decoration: none; color: #0d0d0d; display: block;float:left}
-.lc_result_ul li span{ color:red; display: block; float:right;}
+.lc_video_close {
+    position: absolute;
+    right: 0px;
+    top: -42px;
+}
 
-.lc_footer{ background:#000;padding:10px 0px; }
-.lc_footer div{ color:#fff;}
-.lc_footer_nav{border-bottom:1px solid #454545;padding:10px 0px;}
-.lc_footer_nav ul{ padding:0px; margin:10px 0px 0px 0px;}
-.lc_footer_nav ul li{ list-style-type: none;}
-.lc_footer_nav ul li a{ text-decoration: none; color: #acacac; font-size:12px;}
+.lc_news_ul {
+    padding-right: 10px;
+}
 
-.lc_friendlink{  overflow: hidden;}
-.lc_friendlink a{ display: block; float:left; border:0px;}
-.lc_friendlink a img{ max-width:100px;}
-.lc_footer_copyright{ text-align: center; font-size:12px; color:#c6c6c6; line-height:20px;padding:10px 0px;}
+.lc_news_ul li a {
+    text-decoration: none;
+    color: #0d0d0d;
+    display: block;
+    float: left
+}
+
+.lc_news_ul li span {
+    color: #ccc;
+    display: block;
+    float: right;
+}
+
+.lc_result_ul {
+    padding: 5px 10px;
+}
+
+.lc_result_ul li {
+    list-style-type: none;
+    display: block;
+    overflow: hidden;
+}
+
+.lc_result_ul li a {
+    text-decoration: none;
+    color: #0d0d0d;
+    display: block;
+    float: left
+}
+
+.lc_result_ul li span {
+    color: red;
+    display: block;
+    float: right;
+}
+
+.lc_footer {
+    background: #000;
+    padding: 10px 0px;
+    max-width: 1200px;
+    margin: 0px auto;
+}
+
+.lc_footer div {
+    color: #fff;
+}
+
+.lc_footer_nav {
+    border-bottom: 1px solid #454545;
+    padding: 10px 0px;
+}
+
+.lc_footer_nav ul {
+    padding: 0px;
+    margin: 10px 0px 0px 0px;
+}
+
+.lc_footer_nav ul li {
+    list-style-type: none;
+}
+
+.lc_footer_nav ul li a {
+    text-decoration: none;
+    color: #acacac;
+    font-size: 12px;
+}
+
+.lc_footer_SPA {
+    background: none;
+    color: #000;
+    padding-top: 50px;
+}
+
+.lc_footer_SPA div {
+    color: #000;
+}
+
+.lc_friendlink {
+    overflow: hidden;
+}
+
+.lc_friendlink a {
+    display: block;
+    float: left;
+    border: 0px;
+}
+
+.lc_friendlink a img {
+    max-width: 100px;
+}
+
+.lc_footer_copyright {
+    text-align: center;
+    font-size: 12px;
+    color: #c6c6c6;
+    line-height: 20px;
+    padding: 10px 0px;
+}
+
+.lc_passport {
+    position: absolute;
+    right: 20%;
+    top: 10%;
+    width: 300px;
+    height: 400px;
+    z-index: 3;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, .7);
+}
+
+.lc_passport_login input {
+    margin: 20px 0px 20px 0px;
+}
+
+.lc_passport button {
+    float: right;
+    margin-top: 20px;
+    width: 100%;
+}
+.lc_passport_register .el-input-group__append{
+    cursor: pointer;
+}
+.lc_passport_register img{
+    padding-top:5px;
+}

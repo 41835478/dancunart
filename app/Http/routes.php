@@ -14,11 +14,19 @@
  * 前台路由
  */
 
+//api路由 验证码
+Route::group(['middleware' => ['api']],function(){
+    Route::get('/Passport/captcha','AppPassportController@captcha');
+    Route::get('/Passport/checkCaptcha/{captcha?}','AppPassportController@checkCaptcha');
+});
+
 Route::group(['middleware' => ['web']],function(){
     Route::get('userAttention/{status?}/{id?}','AppUserController@attention');
     Route::get('/','AppIndexController@index');
 
+    Route::resource('/Passport','AppPassportController');
 });
+
 
 /**
  * 后台路由

@@ -11,7 +11,8 @@
         "maatwebsite/excel": "~2.1.0",
         "overtrue/laravel-wechat": "~3.0",
         "simplesoftwareio/simple-qrcode": "~1",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "gregwar/captcha": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

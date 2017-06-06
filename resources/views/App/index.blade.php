@@ -22,9 +22,6 @@
                         <img @click="OpenVideo('{{$vo->video}}')" class="lc_content_left_img" src="{{asset('/')}}{{$vo->img_thumb}}" alt="{{$vo->name}}"/>
                     </el-col>
                     @endforeach
-                    {{--<el-col :xs="12" :sm="12" :md="12" :lg="12">--}}
-                        {{--<img @click="OpenVideo('//vo.fod4.com/v/25c17d6eb2/v600.mp4')" class="lc_content_left_img" src="{{asset('AppStatic/images')}}/banner.jpg" />--}}
-                    {{--</el-col>--}}
 
                 </el-row>
             </el-col>
