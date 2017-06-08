@@ -29,4 +29,19 @@ class UserModel extends Model
         if($user->save()) return $user->id;
         else return false;
     }
+
+    public static function login_get($account){
+        return self::where(function($q) use($account){
+            $q->where('account',$account)
+                ->orWhere('email',$account);
+        })->first();
+    }
+
+    public static function register($account,$password){
+        $new_user = new self;
+        $new_user->account=$account;
+        $new_user->pwd=$password;
+        $new_user->save();
+        return $new_user->id;
+    }
 }

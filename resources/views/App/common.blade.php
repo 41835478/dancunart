@@ -14,12 +14,6 @@
     <script src="{{asset('AppStatic/js')}}/vue.js"></script>
     <script src="{{asset('AppStatic/js')}}/index.js"></script>
 
-    <script src="{{asset('AppStatic/js')}}/axios.min.js"></script>
-
-    <!--video-->
-    <link href="{{asset('AppStatic/css')}}/video-js.min.css" rel="stylesheet">
-    <script src="{{asset('AppStatic/js')}}/video.min.js"></script>
-
     <!--[if lt IE 9]>
     <div class="topframe">你的浏览器 <strong>太旧了</strong> ,请升级获得更好的体验
         <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a>
@@ -27,17 +21,17 @@
     <![endif]-->
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
 
 
-    <div class="padding4">
-    <el-dropdown v-if="islogin" v-cloak>
+    <div class="padding5">
+    <el-dropdown v-if="login_name!=''" v-cloak>
       <span class="el-dropdown-link">
-        您好：admin<i class="el-icon-caret-bottom el-icon--right"></i>
+        您好：@{{login_name}}<i class="el-icon-caret-bottom el-icon--right"></i>
       </span>
         <el-dropdown-menu slot="dropdown">
             <el-dropdown-item >个人中心</el-dropdown-item>
-            <el-dropdown-item >登出</el-dropdown-item>
+            <el-dropdown-item onclick="jump('Passport/loginOut')">登出</el-dropdown-item>
         </el-dropdown-menu>
     </el-dropdown>
 
@@ -112,10 +106,16 @@
     </div>
 </div>
 </body>
+
+<script src="{{asset('AppStatic/js')}}/axios.min.js"></script>
+<!--video-->
+<link href="{{asset('AppStatic/css')}}/video-js.min.css" rel="stylesheet">
+<script src="{{asset('AppStatic/js')}}/video.min.js"></script>
+<script src="{{asset('AppStatic/js')}}/add.js"></script>
 @yield('footer')
 <script>
     function jump(url){
-        window.location.href="{{asset('/')}}"+url;
+        window.location.href="{{asset('/')}}"+url+'?redirect='+window.location.href;
     }
 </script>
 </html>

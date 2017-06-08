@@ -36,7 +36,7 @@ class AdminUserController extends Controller
             'nick'=> 'required|min:2|max:16',
             'pwd' => 'required|min:6',
             'email' => 'email',
-            'mob'=>'regex:/^1[34578][0-9]{9}$/'
+            'mob'=>'regex:/^1[34578]\d{9}$/'
         ]);
         if ($validator->fails()) {
             self::json_return(20001);

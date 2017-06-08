@@ -1,7 +1,7 @@
 @extends('App.common')
 @section('content')
     <template>
-        <el-carousel :interval="5000" arrow="always">
+        <el-carousel  trigger="click"  :interval="8000" arrow="always">
 
             @foreach ($banner as $key=>$rs)
                 <el-carousel-item>
@@ -17,6 +17,7 @@
             <el-col :xs="24" :sm="8" :md="8" :lg="8">
                 <p>视频 /</p>
                 <el-row :gutter="20">
+
                     @foreach($art_work_list as $key=>$vo)
                     <el-col :xs="12" :sm="12" :md="12" :lg="12">
                         <img @click="OpenVideo('{{$vo->video}}')" class="lc_content_left_img" src="{{asset('/')}}{{$vo->img_thumb}}" alt="{{$vo->name}}"/>
@@ -52,7 +53,7 @@
             </a>
         @endforeach
     </div>
-    <div class="lc_video" v-show="playVideo">
+    <div class="lc_video" v-show="playVideo" v-cloak>
         <div class="lc_video_center" :style="[{left: video_left + 'px'},{top: video_top + 'px'}]">
             <el-button class="lc_video_close" icon="close" @click="VideoClose"></el-button>
             <video
@@ -84,7 +85,7 @@
             data: function() {
                 return {
                     activeIndex: '1',
-                    islogin:0,
+                    login_name:'{{$user_name}}',
                     playVideo:0,
                     select: '',
                     search:'',

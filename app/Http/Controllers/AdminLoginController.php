@@ -61,10 +61,8 @@ class AdminLoginController extends Controller
 	}
 
 	public function cleanRedis(){
-       $res = Redis::del(config('app.redis_array_cache'));
-
-           if($res > 0) self::json_return('60000');
-           else if($res == 0) self::json_return('60002');
+        $res = Redis::FLUSHDB();
+           if($res) self::json_return('60000');
            else self::json_return('60001');
     }
 }

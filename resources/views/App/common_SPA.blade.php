@@ -14,8 +14,6 @@
     <script src="{{asset('AppStatic/js')}}/vue.js"></script>
     <script src="{{asset('AppStatic/js')}}/index.js"></script>
 
-    <script src="{{asset('AppStatic/js')}}/axios.min.js"></script>
-
     <!--[if lt IE 9]>
     <div class="topframe">你的浏览器 <strong>太旧了</strong> ,请升级获得更好的体验
         <a target="_blank" class="alert-link" href="http://browsehappy.com">立即升级</a>
@@ -23,7 +21,7 @@
     <![endif]-->
 </head>
 <body>
-<div id="app_SPA">
+<div id="app_SPA" v-cloak>
 
     @yield('content')
     <div class="lc_footer lc_footer_SPA">
@@ -50,6 +48,8 @@
     </div>
 </div>
 </body>
+<script src="{{asset('AppStatic/js')}}/axios.min.js"></script>
+<script src="{{asset('AppStatic/js')}}/add.js"></script>
 @yield('footer')
 <script>
     function jump(url){

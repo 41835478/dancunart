@@ -1,3 +1,18 @@
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
+}
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+}
+
+
 body {
     margin: 0px;
     background: #eef1f6;
@@ -19,6 +34,7 @@ body {
 
 .padding5 {
     padding: 5px 10px;
+    overflow: hidden;
 }
 
 [v-cloak] {
@@ -263,6 +279,23 @@ body {
     background: rgba(255, 255, 255, .7);
 }
 
+.lc_passport_tip {
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+
+.lc_passport_tip a {
+    text-decoration: none;
+    color: #8391a5;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.lc_passport_tip a:hover {
+    color: #20a0ff;
+}
+
 .lc_passport_login input {
     margin: 20px 0px 20px 0px;
 }
@@ -272,9 +305,20 @@ body {
     margin-top: 20px;
     width: 100%;
 }
-.lc_passport_register .el-input-group__append{
+
+.lc_passport_mob .el-input-group__append {
     cursor: pointer;
 }
-.lc_passport_register img{
-    padding-top:5px;
+
+.lc_passport img {
+    padding-top: 5px;
+}
+
+.lc_passport_register {
+    top: 5%;
+    height: 500px;
+}
+
+.lc_passport_register .el-input-group__append {
+    cursor: pointer;
 }

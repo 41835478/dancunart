@@ -21,6 +21,16 @@ class UserSeeder extends Seeder
             'updated_at'=>date('Y-m-d H:i:s'),
         ]);
 
+        DB::table('user')->insert([
+            'account' => 'charis',
+            'pwd'  => 'eyJpdiI6IjRQVXJaS1FSaGRBVU5QaGFzY0g2SEE9PSIsInZhbHVlIjoiaXF6Q3owNzRtSjBSb25XUWtzYWlTdz09IiwibWFjIjoiOTc3NTQzYzk5NWQzNmE4NWI3ZmU0OGU0Mjc5YmQ2ZjNmZWY2YzIyNDM1MDI3MDEyNzA4MmMxYTE3NTljNmQwNiJ9',
+            'nick' => 'charis',
+            'email' => '22@qq.com',
+            'mob'=>'13111111111',
+            'created_at'=>date('Y-m-d H:i:s'),
+            'updated_at'=>date('Y-m-d H:i:s'),
+        ]);
+
         DB::table('user_log')->insert([
             'uid' => '1',
             'action' => '新增用户',

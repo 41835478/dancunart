@@ -16,7 +16,7 @@
 
 //api路由 验证码
 Route::group(['middleware' => ['api']],function(){
-    Route::get('/Passport/captcha','AppPassportController@captcha');
+    Route::get('/Passport/captcha/{width?}/{height?}','AppPassportController@captcha');
     Route::get('/Passport/checkCaptcha/{captcha?}','AppPassportController@checkCaptcha');
 });
 
@@ -24,7 +24,15 @@ Route::group(['middleware' => ['web']],function(){
     Route::get('userAttention/{status?}/{id?}','AppUserController@attention');
     Route::get('/','AppIndexController@index');
 
-    Route::resource('/Passport','AppPassportController');
+    //登录注册相关
+    Route::get('/Passport','AppPassportController@login');
+    Route::get('/Passport/loginOut','AppPassportController@loginOut');
+    Route::post('/Passport/login','AppPassportController@postLogin');
+    Route::get('/Passport/register','AppPassportController@register');
+    Route::post('/Passport/register','AppPassportController@postRegister');
+
+    //文章内页相关
+    Route::get('/Article/{id?}','AppArticleController@index');
 });
 
 

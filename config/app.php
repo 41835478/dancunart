@@ -49,8 +49,6 @@ return [
     'title_en' => env('TITLE_EN',''),
     'copyright' => env('COPY_RIGHT',''),
     'versionCMS' => env('VERSION_CMS',''),
-    //redis 缓存列表
-    'redis_array_cache' => array('site','banner','artwork_nav','article','friend_link','art_work_list','footer_nav'),
 
     /*
     |--------------------------------------------------------------------------
@@ -232,6 +230,7 @@ return [
         '40000' => '登录成功',
         '40001' =>'登录失败 账号或密码错误',
         '40002' =>'数据连接异常，请重试',
+        '40003' =>'短信验证码错误',
 
         //delete status
         '50000' => '删除成功',
@@ -240,6 +239,10 @@ return [
         //redis status
         '60000' => '清除成功',
         '60001' => '清除失败',
-        '60002' => '没有缓存，不用清理',
+
+        //register status
+        '70000' => '注册成功',
+        '70001' => '注册失败',
+        '70002' => '注册信息验证失败',
     ]
 ];
