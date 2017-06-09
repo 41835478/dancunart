@@ -31,8 +31,9 @@ Route::group(['middleware' => ['web']],function(){
     Route::get('/Passport/register','AppPassportController@register');
     Route::post('/Passport/register','AppPassportController@postRegister');
 
-    //文章内页相关
-    Route::get('/Article/{id?}','AppArticleController@index');
+    //文章列表&内页相关
+    Route::get('/Article/{list}','AppArticleController@getlist');
+    Route::get('/Article/{list}/{id}','AppArticleController@index');
 });
 
 

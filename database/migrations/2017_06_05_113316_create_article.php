@@ -17,7 +17,7 @@ class CreateArticle extends Migration
             $table->string('title',80)->comment('文章标题');
             $table->string('keywords',120)->comment('文章关键词');
             $table->string('description')->comment('文章描述');
-            $table->string('article_class',20)->comment('文章分类');
+            $table->integer('article_class')->comment('文章分类');
             $table->text('content')->comment('文章内容');
             $table->integer('view_count')->comment('初始预览')->default(0);
             $table->char('flag',1)->comment('文章状态 0普通状态，1头条')->default(0);

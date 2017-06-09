@@ -31,7 +31,7 @@
                 <p>新闻 /</p>
                     <ul class="lc_news_ul">
                         @foreach($article as $key=>$vo)
-                        <li><a href="#">{{str_limit($vo->title,20)}}</a><span>{{$vo->updated_at}}</span></li>
+                        <li><a href="{{url('/')}}/Article/{{$vo->article_class}}/{{$vo->id}}">{{str_limit($vo->title,20)}}</a><span>{{$vo->updated_at}}</span></li>
                         @endforeach
                     </ul>
             </el-col>

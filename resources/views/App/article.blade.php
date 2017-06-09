@@ -11,7 +11,7 @@
 
         </el-carousel>
     </template>
-
+    {!! $position !!}
     <h1>{{$data->title}}</h1>
     <p>浏览次数：{{$data->view_count}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{$data->updated_at}}</p>
     {!! $data->content !!}

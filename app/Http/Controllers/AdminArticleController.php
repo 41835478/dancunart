@@ -36,15 +36,13 @@ class AdminArticleController extends Controller
         $article_class = ArticleClass::get();
         $article_class_list='';
         foreach($article_class as $vo){
-            $article_class_list .="<input type='checkbox' name='article_class[]' value='{$vo->id}' datatype='*' errormsg='请选择！'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+            $article_class_list .="<input type='radio' name='article_class' value='{$vo->id}' datatype='*' errormsg='请选择！'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
         }
         return view('Admin.Article.add',compact('title','nav','data','article_class_list'));
     }
 
     public function store(){
         $data = Request::all();
-
-        $data['article_class']=implode(',',$data['article_class']);
         unset($data['_token']);
 
         $res = Article::insertDo($data);
@@ -58,21 +56,19 @@ class AdminArticleController extends Controller
         $title = "修改文章";
         $nav   = '8-1';
         $data = Article::find($id);
-        $data['article_class']=explode(',',$data['article_class']);
 
         $class_list = ArticleClass::get();
         $article_class_list='';
         foreach($class_list as $vo){
             $flag = '';
-            if(in_array($vo->id,$data['article_class'])) $flag='checked';
-            $article_class_list .="<input type='checkbox' $flag name='article_class[{$vo->id}]' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
+            if($vo->id==$data['article_class']) $flag='checked';
+            $article_class_list .="<input type='radio' $flag name='article_class' value='{$vo->id}'>{$vo->class_name}</input>   &nbsp;&nbsp;&nbsp;&nbsp;";
         }
         return view('Admin.Article.edit',compact('title','data','nav','id','article_class_list'));
     }
 
     public function update($id){
         $data = Request::all();
-        $data['article_class']=implode(',',$data['article_class']);
         unset($data['_token']);
 
         $res = Article::updateDo($id,$data);

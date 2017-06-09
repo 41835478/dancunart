@@ -30,4 +30,20 @@ class ArticleModel extends Model
         }
         return $article->save();
     }
+
+    public static function getSingleWithClass($id){
+        $article = new Self;
+        return self::leftJoin('article_class as ac','ac.id','=',$article->table.'.article_class')
+            ->where($article->table.'.id',$id)
+            ->where($article->table.'.status',1)
+            ->first();
+    }
+
+    public static function getAllWithClass($list){
+        $article = new Self;
+        return self::leftJoin('article_class as ac','ac.id','=',$article->table.'.article_class')
+            ->where($article->table.'.article_class',$list)
+            ->where($article->table.'.status',1)
+            ->paginate(10);
+    }
 }
