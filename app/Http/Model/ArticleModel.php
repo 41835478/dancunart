@@ -39,11 +39,9 @@ class ArticleModel extends Model
             ->first();
     }
 
-    public static function getAllWithClass($list){
-        $article = new Self;
-        return self::leftJoin('article_class as ac','ac.id','=',$article->table.'.article_class')
-            ->where($article->table.'.article_class',$list)
-            ->where($article->table.'.status',1)
+    public static function getAllByClass($list){
+        return self::where('article_class',$list)
+            ->where('status',1)
             ->paginate(10);
     }
 }

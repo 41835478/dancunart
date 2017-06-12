@@ -12,9 +12,11 @@
         </el-carousel>
     </template>
     {!! $position !!}
-    <h1>{{$data->title}}</h1>
-    <p>浏览次数：{{$data->view_count}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间：{{$data->updated_at}}</p>
-    {!! $data->content !!}
+        <ul>
+    @foreach($data as $key=>$vo)
+        <li><a href="{{url('/')}}/Artwork/{{$list}}/{{$vo->id}}">{{$vo->name}}</a></li>
+    @endforeach
+        </ul>
 
 @endsection
 @section('footer')
@@ -28,6 +30,7 @@
                     activeIndex: '1',
                     login_name:'{{$user_name}}',
                     search:'',
+                    select: '',
                 }
             }
         })

@@ -107,8 +107,10 @@
     <script type="text/javascript" src="{{asset('umeditor/lang/zh-cn/zh-cn.js')}}"></script>
 
     <script src="{{asset('static/js/jquery.ajaxfileupload.js')}}"></script>
-
+    <script src="{{asset('static/js/linkchecked.js')}}"></script>
     <script>
+        //开启checkbox多选模式
+        $.linkchecked('dep');
         //上传图片相关
         function applyAjaxFileUpload(element) {
             $(element).AjaxFileUpload({
@@ -143,6 +145,11 @@
             applyAjaxFileUpload("#upload_btn");
         })
 
+        $("#parent_1").change(function(){
+            console.log(this.attr('class'))
+            $('#'+this.attr('class')).checked();
+        })
+
         //编辑器相关
         var um = UM.getEditor('container');
 
@@ -168,7 +175,7 @@
             demo.addRule([
                 {
                     ele:":checkbox",
-                    datatype:"*"
+                    datatype:"*",
                 }]);
 
 

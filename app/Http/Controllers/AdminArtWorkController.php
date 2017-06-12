@@ -27,7 +27,7 @@ class AdminArtWorkController extends Controller
             }
         }
 
-        $artwork_class = ArtworkClass::get();
+        $artwork_class = ArtworkClass::where('parent_id','<>',0)->get();
 
         foreach($data as $key0=>$vo){
             $self_class = explode(',',$data[$key0]['artwork_class']);
@@ -46,7 +46,7 @@ class AdminArtWorkController extends Controller
 
         $artwork_class = ArtworkClass::get();
         $new_array = $this->list_to_array($artwork_class);
-        $artwork_class_list = $this->list_to_html($new_array);
+        $artwork_class_list = '<div>'.$this->list_to_html($new_array).'</div>';
 
         $artist = Artist::get();
         $artist_list='';
@@ -183,21 +183,27 @@ class AdminArtWorkController extends Controller
     /*
      * 递归转换成html
      */
-    public function list_to_html($list,$artwork_class=0)
+    public function list_to_html($list,$artwork_class=0,$deep=0)
     {
         $html = '';
 
         foreach ($list as $key => $vo) {
+
             if($vo->parent_id){
                 if($artwork_class!=0 && in_array($vo->id,$artwork_class)) $flag='checked';
                 else $flag='';
 
-                $html .= "<input type='checkbox' $flag name='artwork_class[]' value='$vo->id'>$vo->class_name</input> &nbsp;&nbsp;&nbsp;&nbsp;";
+                $html .= "<input linkchecked-name='dep_".$deep."_".$key."' type='checkbox' $flag name='artwork_class[]' value='$vo->id'>$vo->class_name</input> &nbsp;&nbsp;&nbsp;&nbsp;";
             }
-            else
-                $html .= "<div style='padding:15px 0px'>".$vo->class_name.' &nbsp:</div>';
+            else{
+                if($artwork_class!=0 && in_array($vo->id,$artwork_class)) $flag='checked';
+                else $flag='';
+
+                $html .= "<hr/><input linkchecked-name='dep_".$key."' style='padding:15px 0px;' type='checkbox' $flag name='artwork_class[]' value='$vo->id'>".$vo->class_name.'</input> &nbsp:<br />';
+            }
+
             if (is_array($vo->son)) {
-                $html .= $this->list_to_html($vo->son,$artwork_class);
+                $html .= $this->list_to_html($vo->son,$artwork_class,$key);
             }
         }
         return $html;

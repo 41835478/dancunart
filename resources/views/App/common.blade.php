@@ -62,11 +62,11 @@
 
         @foreach ($artwork_nav as $key=>$rs)
         <el-menu-item-group  class="leftnavul">
-            <div class="leftnavtitle"><a href="#">{{$rs->class_name}}</a></div>
+            <div class="leftnavtitle"><a href="{{url('/')}}/Artwork/{{$rs->id}}">{{$rs->class_name}}</a></div>
             @if(isset($rs->son))
             <div class="leftnavitem">
                 @foreach ($rs->son as $key2=>$rs2)
-                <a href="#">{{$rs2->class_name}}</a>
+                <a href="{{url('/')}}/Artwork/{{$rs2->id}}">{{$rs2->class_name}}</a>
                 @endforeach
             </div>
             @endif

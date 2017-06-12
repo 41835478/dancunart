@@ -34,6 +34,10 @@ Route::group(['middleware' => ['web']],function(){
     //文章列表&内页相关
     Route::get('/Article/{list}','AppArticleController@getlist');
     Route::get('/Article/{list}/{id}','AppArticleController@index');
+
+    //艺术品列表&内页拍卖相关
+    Route::get('/Artwork/{list}','AppArtworkController@getlist');
+    Route::get('/Artwork/{list}/{id}','AppArtworkController@index');
 });
 
 

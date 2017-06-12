@@ -107,8 +107,10 @@
     <script type="text/javascript" src="{{asset('umeditor/lang/zh-cn/zh-cn.js')}}"></script>
 
     <script src="{{asset('static/js/jquery.ajaxfileupload.js')}}"></script>
-
+    <script src="{{asset('static/js/linkchecked.js')}}"></script>
     <script>
+        //开启checkbox多选模式
+        $.linkchecked('dep');
         //上传图片相关
         function applyAjaxFileUpload(element) {
             $(element).AjaxFileUpload({

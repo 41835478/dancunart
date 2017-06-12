@@ -25,7 +25,7 @@ class AppController extends Controller
 
     public function __construct()
     {
-        echo 'start:'.microtime(true).'<br />';
+//        echo 'start:'.microtime(true).'<br />';
         //缓存site
         if(Redis::exists('site')){
             $this->site = json_decode(Redis::get('site'));
@@ -93,10 +93,24 @@ class AppController extends Controller
             else $this->user_name=Session::get('userLogin')->account;
         }
     }
-
     /**
      * 查询子分类
      */
+    public function __destruct()
+    {
+        echo 'end  :'.microtime(true).'<br />';
+    }
+    public function position($array){
+        $url = "<a href=".URL('/').">首页</a>>>";
+        foreach($array as $key=>$vo){
+            if($vo['url']!='#')
+                $url.="<a href=".$vo['url'].">".$vo['name']."</a>>>";
+            else
+                $url.=$vo['name'].">>";
+        }
+        $url=rtrim($url,'>>');
+        return $url;
+    }
     public function list_to_array($list, $pid = 0)
     {
         $new_array = array();
