@@ -27,7 +27,8 @@ class AppArticleController extends AppController
 
     public function index($list=0,$id=0){
         $id=(int)$id;
-        if($id<=0) abort(404);
+        $list=(int)$list;
+        if($id<=0 || $list<=0) abort(404);
         else{
         $site=$this->site;
         $banner=$this->banner;

@@ -18,6 +18,7 @@
 Route::group(['middleware' => ['api']],function(){
     Route::get('/Passport/captcha/{width?}/{height?}','AppPassportController@captcha');
     Route::get('/Passport/checkCaptcha/{captcha?}','AppPassportController@checkCaptcha');
+    Route::post('/Auction','AppAuctionController@index');
 });
 
 Route::group(['middleware' => ['web']],function(){

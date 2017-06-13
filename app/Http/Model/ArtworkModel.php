@@ -23,4 +23,10 @@ class ArtworkModel extends Model
         }
         return $artwork->save();
     }
+
+    public static function getArtwork($id){
+        return self::where('id',$id)
+            ->where('status',1)
+            ->first();
+    }
 }

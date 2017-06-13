@@ -7,7 +7,7 @@ use App\Http\Model\ArtistModel as Artist;
 use App\Http\Model\ArtworkModel as Artwork;
 use App\Http\Model\ArtworkClassModel as ArtworkClass;
 
-class AdminArtWorkController extends Controller
+class AdminArtWorkController extends AppController
 {
     public function index(){
         $title = "拍品列表";

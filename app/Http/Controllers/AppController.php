@@ -98,17 +98,20 @@ class AppController extends Controller
      */
     public function __destruct()
     {
-        echo 'end  :'.microtime(true).'<br />';
+//        echo 'end  :'.microtime(true).'<br />';
     }
     public function position($array){
         $url = "<a href=".URL('/').">首页</a>>>";
         foreach($array as $key=>$vo){
             if($vo['url']!='#')
-                $url.="<a href=".$vo['url'].">".$vo['name']."</a>>>";
+                $url.="<a href=".$vo['url'].">".$vo['name']."</a>";
             else
-                $url.=$vo['name'].">>";
+                $url.=$vo['name'];
+            if(isset($vo['same_level'])) $url.='|';
+            else $url.='>>';
         }
         $url=rtrim($url,'>>');
+        $url=rtrim($url,'|');
         return $url;
     }
     public function list_to_array($list, $pid = 0)
