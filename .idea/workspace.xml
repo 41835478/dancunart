@@ -21,12 +21,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="25">
-                <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
+              <first_editor relative-caret-position="50">
+                <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -76,7 +76,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="artwork.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="artwork.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/App/Artwork/artwork.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="647">
@@ -148,7 +148,6 @@
         <option value="$PROJECT_DIR$/resources/views/App/Article/article.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Model/ArticleModel.php" />
         <option value="$PROJECT_DIR$/resources/views/App/Article/articleList.blade.php" />
-        <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/resources/views/App/common.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Model/ArtworkClassModel.php" />
         <option value="$PROJECT_DIR$/resources/views/App/Artwork/artworkList.blade.php" />
@@ -167,6 +166,7 @@
         <option value="$PROJECT_DIR$/resources/views/App/Artwork/artwork.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AppAuctionController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/readme.md" />
       </list>
     </option>
   </component>
@@ -630,12 +630,12 @@
       <workItem from="1496884335133" duration="22145000" />
       <workItem from="1496987767631" duration="9236000" />
       <workItem from="1497235013178" duration="17085000" />
-      <workItem from="1497316061901" duration="14734000" />
+      <workItem from="1497316061901" duration="15077000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="487220000" />
+    <option name="totallyTimeSpent" value="487563000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1932" height="1056" extended-state="0" />
@@ -968,17 +968,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="25">
-            <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Model/ArtworkClassModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1124,6 +1113,17 @@
           <folding>
             <element signature="e#893#917#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="50">
+            <caret line="2" column="38" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="38" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
