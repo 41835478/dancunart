@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request,DB;
+use Request,DB,Redis;
 use App\Http\Model\ArtistModel as Artist;
 use App\Http\Model\ArtworkModel as Artwork;
 use App\Http\Model\ArtworkClassModel as ArtworkClass;
@@ -77,6 +77,7 @@ class AdminArtWorkController extends AppController
 
         if($res1 && $res2){
             DB::commit();
+            Redis::del('artwork_'.$res2);
             self::json_return(20000);
         }
         else{
@@ -137,6 +138,7 @@ class AdminArtWorkController extends AppController
 
         if($res1 && $res2 && $res3){
             DB::commit();
+            Redis::del('artwork_'.$res3);
             self::json_return(30000);
         }
         else{
@@ -153,6 +155,7 @@ class AdminArtWorkController extends AppController
             $res2 = Artwork::where('id',$id)->delete();
         if($res1 && $res2) {
             DB::commit();
+            Redis::del('artwork_'.$id);
             self::json_return(50000);
         }
         else{

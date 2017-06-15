@@ -15,9 +15,10 @@ class AppPassportController extends AppController
     }
 
     public function loginOut(){
+        $redirect = Request::input('redirect','/');
         Session::forget('userLogin');
         Session::save();
-        header('Location:'.URL('/'));
+        header('Location:'.URL(''.$redirect.''));
         exit;
     }
 

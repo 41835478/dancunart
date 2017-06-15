@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Request,Redis;
+use Request,Redis,Session;
 use App\Http\Model\ArtworkModel as Artwork;
 use App\Http\Model\ArtworkClassModel as ArtworkClass;
 class AppArtworkController extends AppController
@@ -33,6 +33,7 @@ class AppArtworkController extends AppController
     }
 
     public function index($list=0,$id=0){
+
         $id=(int)$id;
         $list=(int)$list;
         if($id<=0 || $list<=0) abort(404);
@@ -74,8 +75,10 @@ class AppArtworkController extends AppController
                 }
 
                 $position = $this->position($position_array);
-
-                return view('App.Artwork.artwork',compact('site','user_name','position','banner','artwork_nav','footer_nav','data'));
+                if(Session::has('userLogin'))
+                    $user_cash = Session::get('userLogin')->user_cash;
+                else $user_cash=0;
+                return view('App.Artwork.artwork',compact('site','user_name','user_cash','position','banner','artwork_nav','footer_nav','data'));
             }
             else abort(404);
         }

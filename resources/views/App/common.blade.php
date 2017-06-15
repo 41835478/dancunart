@@ -75,8 +75,7 @@
 
     </el-submenu>
 
-    <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">在线拍卖</a></el-menu-item>
-    <el-menu-item index="3"><a href="https://www.ele.me" target="_blank">艺术品</a></el-menu-item>
+    <el-menu-item index="3"><a href="{{url('/Artist')}}" target="_blank">艺术家</a></el-menu-item>
 
 
     </el-menu>

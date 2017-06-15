@@ -4,7 +4,7 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderAuchtionModel extends Model
+class OrderAuctionModel extends Model
 {
     protected $table='order_auction';
 
@@ -20,4 +20,15 @@ class OrderAuchtionModel extends Model
                 ->select($order->table.'.*','u.account','u.nick','aw.name')
                 ->paginate(25);
     }
+
+    public static function getDetail($id){
+        $detail = new self;
+        return $detail::leftJoin('user as u','u.id','=',$detail->table.'.uid')
+                        ->where($detail->table.'.artwork_id',$id)
+                        ->select($detail->table.'.old_price',$detail->table.'.price_increase',$detail->table.'.created_at','u.account','u.nick')
+                        ->orderby($detail->table.'.id','desc')
+                        ->get();
+
+    }
+
 }

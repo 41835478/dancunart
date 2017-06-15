@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Request,DB,Session,Validator;
 use App\Http\Model\OrderModel as Order;
-use App\Http\Model\OrderAuchtionModel as Auchtion;
+use App\Http\Model\OrderAuctionModel as Auction;
 use App\Http\Model\OrderWithdrawModel as Withdraw;
 use App\Http\Model\UserLogModel as UserLog;
 use App\Http\Model\OrderExpressModel as OrderExpress;
@@ -23,7 +23,7 @@ class AdminOrderController extends Controller
 
         return view('Admin.Order.index',compact('title','key','nav','searchitem','data'));
     }
-    public function auchtion(){
+    public function Auction(){
         $title = "参拍记录";
         $nav   = '5-3';
         $key=Request::input('key','');
@@ -31,9 +31,9 @@ class AdminOrderController extends Controller
         $searchitem = [];
         if($key) $searchitem['key'] = $key;
 
-        $data = Auchtion::getAll($key);
+        $data = Auction::getAll($key);
 
-        return view('Admin.Order.auchtion',compact('title','key','nav','searchitem','data'));
+        return view('Admin.Order.Auction',compact('title','key','nav','searchitem','data'));
     }
     public function withdraw(){
         $title = "提现管理";

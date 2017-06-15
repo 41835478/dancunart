@@ -322,3 +322,9 @@ body {
 .lc_passport_register .el-input-group__append {
     cursor: pointer;
 }
+
+.lc_pay_footer{
+    padding: 10px 20px 15px;
+    text-align: right;
+    box-sizing: border-box;
+}

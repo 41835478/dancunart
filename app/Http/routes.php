@@ -18,11 +18,14 @@
 Route::group(['middleware' => ['api']],function(){
     Route::get('/Passport/captcha/{width?}/{height?}','AppPassportController@captcha');
     Route::get('/Passport/checkCaptcha/{captcha?}','AppPassportController@checkCaptcha');
-    Route::post('/Auction','AppAuctionController@index');
 });
 
 Route::group(['middleware' => ['web']],function(){
     Route::get('userAttention/{status?}/{id?}','AppUserController@attention');
+    //拉取拍卖信息
+    Route::post('/Auction','AppAuctionController@index');
+
+    //首页
     Route::get('/','AppIndexController@index');
 
     //登录注册相关
@@ -87,7 +90,7 @@ Route::group(['middleware' => ['web','checklogin'],'prefix' => 'admin'], functio
     Route::resource('artworkclass','AdminArtWorkClassController');
     //后台订单路由
     Route::get('order','AdminOrderController@order');
-    Route::get('orderAuction','AdminOrderController@auchtion');
+    Route::get('orderAuction','AdminOrderController@auction');
     Route::get('orderWithdraw','AdminOrderController@withdraw');
     Route::post('withdraw/{id?}','AdminOrderController@withdrawhandle');
     Route::post('order/{id?}','AdminOrderController@orderhandle');

@@ -13,7 +13,8 @@ class ArtworkModel extends Model
         foreach($data as $key=>$vo){
             $artwork->$key = $vo;
         }
-        return $artwork->save();
+        $artwork->save();
+        return $artwork->id;
     }
 
     public static function updateDo($id,$data){
@@ -21,7 +22,8 @@ class ArtworkModel extends Model
         foreach($data as $key=>$vo){
             $artwork->$key = $vo;
         }
-        return $artwork->save();
+        $artwork->save();
+        return $artwork->id;
     }
 
     public static function getArtwork($id){
