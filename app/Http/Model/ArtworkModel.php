@@ -31,4 +31,10 @@ class ArtworkModel extends Model
             ->where('status',1)
             ->first();
     }
+
+    public static function getArtworkByArtist($id){
+        return self::whereRaw('FIND_IN_SET(?,artist)', [$id])
+            ->where('status',1)
+            ->paginate(25);
+    }
 }

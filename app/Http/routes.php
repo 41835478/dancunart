@@ -42,6 +42,12 @@ Route::group(['middleware' => ['web']],function(){
     //艺术品列表&内页拍卖相关
     Route::get('/Artwork/{list}','AppArtworkController@getlist');
     Route::get('/Artwork/{list}/{id}','AppArtworkController@index');
+
+    //艺术家列表
+    Route::get('/Artist/','AppArtistController@index');
+    Route::get('/Artist/list/{id}','AppArtistController@getlist');
+    Route::get('/Artist/{id}','AppArtistController@getdetail');
+
 });
 
 
