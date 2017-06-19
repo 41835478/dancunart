@@ -90,7 +90,7 @@
                 @if(isset($rs->son))
                     <ul>
                         @foreach ($rs->son as $key2=>$rs2)
-                        <li><a href="#">{{$rs2->page_name}}</a></li>
+                        <li><a href="{{URL('/')}}/single/{{$rs2->id}}">{{$rs2->page_name}}</a></li>
                         @endforeach
                     </ul>
                 @endif

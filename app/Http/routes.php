@@ -48,6 +48,8 @@ Route::group(['middleware' => ['web']],function(){
     Route::get('/Artist/list/{id}','AppArtistController@getlist');
     Route::get('/Artist/{id}','AppArtistController@getdetail');
 
+    //单页展示
+    Route::get('single/{id?}','AppSingleController@index');
 });
 
 
